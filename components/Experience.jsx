@@ -31,8 +31,8 @@ export default function Experience() {
             counters.forEach((counter) => animateCounter(counter));
             statBoxes.forEach((box, index) => {
               setTimeout(() => {
-                box.classList.add('visible');
-              }, index * 150); // staggered animation
+                box.classList.add('opacity-100', 'translate-y-0', 'scale-100');
+              }, index * 150);
             });
             setAnimated(true);
             observer.unobserve(sectionRef.current);
@@ -46,147 +46,40 @@ export default function Experience() {
   }, [animated]);
 
   return (
-    <>
-      <style jsx>{`
-        .stats-section {
-          position: relative;
-          background: linear-gradient(135deg, #001f3f, #003d73);
-          padding: 100px 0;
-          color: #ffffff;
-          overflow: hidden;
-        }
+    <section
+      ref={sectionRef}
+      className="relative bg-gradient-to-br from-[#001f3f] to-[#003d73] py-24 overflow-hidden text-white"
+    >
+      {/* Soft background radial glow */}
+      <div className="absolute top-[-20%] left-[-10%] w-[130%] h-[160%] bg-[radial-gradient(circle_at_top_left,rgba(255,255,255,0.05),transparent_70%)] z-0"></div>
 
-        .stats-section::before {
-          content: '';
-          position: absolute;
-          top: -20%;
-          left: -10%;
-          width: 130%;
-          height: 160%;
-          background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.05), transparent 70%);
-          z-index: 0;
-        }
-
-        .stats-container {
-          max-width: 1200px;
-          margin: auto;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-wrap: wrap;
-          gap: 40px;
-          padding: 0 30px;
-          z-index: 1;
-          position: relative;
-        }
-
-        .stat-box {
-          background: rgba(255, 255, 255, 0.06);
-          backdrop-filter: blur(8px);
-          border: 1px solid rgba(255, 255, 255, 0.1);
-          border-radius: 16px;
-          padding: 40px 25px;
-          flex: 1 1 240px;
-          text-align: center;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-          transform: translateY(50px);
-          opacity: 0;
-          transition: all 0.6s ease;
-        }
-
-        .stat-box.visible {
-          transform: translateY(0);
-          opacity: 1;
-        }
-
-        .stat-box:hover {
-          transform: translateY(-12px) scale(1.05);
-          box-shadow: 0 25px 45px rgba(0, 0, 0, 0.4);
-        }
-
-        .icon-circle {
-          width: 110px;
-          height: 110px;
-          margin: 0 auto 20px;
-          border-radius: 50%;
-          background: radial-gradient(circle, #ffffff, #cbe6ff);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 6px 12px rgba(255, 255, 255, 0.2);
-          transition: transform 0.3s ease;
-        }
-
-        .stat-box:hover .icon-circle {
-          transform: scale(1.1);
-        }
-
-        .icon-circle i {
-          font-size: 44px;
-          color: #003d73;
-        }
-
-        .stat-number {
-          font-size: 34px;
-          font-weight: 800;
-          color: #ffffff;
-          margin-bottom: 10px;
-        }
-
-        .stat-label {
-          font-size: 14px;
-          color: #e1f3ff;
-          text-transform: uppercase;
-          letter-spacing: 1px;
-        }
-
-        @media (max-width: 768px) {
-          .stats-container {
-            flex-direction: column;
-            gap: 30px;
-          }
-          .stat-box {
-            max-width: 320px;
-            width: 100%;
-          }
-        }
-      `}</style>
-
-      <section className="stats-section" ref={sectionRef}>
-        <div className="stats-container">
-          <div className="stat-box">
-            <div className="icon-circle">
-              <i className="fas fa-thumbs-up"></i>
+      {/* Stats Container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 flex flex-wrap justify-center items-center gap-10">
+        {[
+          { icon: 'fa-thumbs-up', number: 55000, label: 'Installed Products' },
+          { icon: 'fa-award', number: 45, label: 'Years of Experience' },
+          { icon: 'fa-users', number: 150, label: 'Employees' },
+          { icon: 'fa-globe', number: 40, label: 'Worldwide Partners' },
+        ].map((item, i) => (
+          <div
+            key={i}
+            className="stat-box transform translate-y-12 scale-95 opacity-0 transition-all duration-700 ease-in-out bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-10 text-center shadow-[0_10px_30px_rgba(0,0,0,0.25)] hover:-translate-y-3 hover:scale-105 hover:shadow-[0_30px_50px_rgba(0,0,0,0.4)] flex-1 min-w-[240px] max-w-sm"
+          >
+            <div className="icon-circle w-[110px] h-[110px] mx-auto mb-6 rounded-full bg-[radial-gradient(circle,#ffffff,#cbe6ff)] flex items-center justify-center shadow-[0_6px_12px_rgba(255,255,255,0.2)] transition-transform hover:scale-110">
+              <i className={`fas ${item.icon} text-[44px] text-[#003d73]`}></i>
             </div>
-            <div className="stat-number" data-target="55000">0</div>
-            <div className="stat-label">Installed Products</div>
-          </div>
-
-          <div className="stat-box">
-            <div className="icon-circle">
-              <i className="fas fa-award"></i>
+            <div
+              className="stat-number text-[36px] font-extrabold mb-2 text-white tracking-wide"
+              data-target={item.number}
+            >
+              0
             </div>
-            <div className="stat-number" data-target="45">0</div>
-            <div className="stat-label">Years of Experience</div>
-          </div>
-
-          <div className="stat-box">
-            <div className="icon-circle">
-              <i className="fas fa-users"></i>
+            <div className="stat-label text-sm text-[#d8f0ff] uppercase tracking-wider">
+              {item.label}
             </div>
-            <div className="stat-number" data-target="150">0</div>
-            <div className="stat-label">Employees</div>
           </div>
-
-          <div className="stat-box">
-            <div className="icon-circle">
-              <i className="fas fa-globe"></i>
-            </div>
-            <div className="stat-number" data-target="40">0</div>
-            <div className="stat-label">Worldwide Partners</div>
-          </div>
-        </div>
-      </section>
-    </>
+        ))}
+      </div>
+    </section>
   );
 }

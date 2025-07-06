@@ -89,215 +89,78 @@ export default function HomeSection() {
   }, [currentIndex]);
 
   return (
-    <>
+    <div className="relative w-full h-screen max-h-[900px] min-h-[600px] overflow-hidden">
+      {/* Arrows */}
+      <button
+        className="absolute top-1/2 left-4 transform -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/10 text-white text-xl rounded-full z-20 flex items-center justify-center hover:bg-white/20 transition"
+        onClick={goToPrev}
+      >
+        &#8249;
+      </button>
+
+      <button
+        className="absolute top-1/2 right-4 transform -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/10 text-white text-xl rounded-full z-20 flex items-center justify-center hover:bg-white/20 transition"
+        onClick={goToNext}
+      >
+        &#8250;
+      </button>
+
+      {/* Slides */}
+      <div
+        className="flex h-full transition-transform duration-700 ease-in-out"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        ref={slidesRef}
+      >
+        {slides.map((slide, i) => (
+          <div key={i} className="relative flex-shrink-0 w-full h-full overflow-hidden">
+            {/* Background image */}
+            <img
+              src={slide.img}
+              alt={slide.title}
+              className="w-full h-full object-cover scale-100 hover:scale-105 transition-transform duration-700 ease-in-out"
+            />
+
+            {/* Diagonal blur overlay */}
+            <div className="absolute inset-0 z-10 bg-[#0a1f44aa] backdrop-blur-md clip-diagonal pointer-events-none" />
+
+            {/* Content box */}
+            <div className={`absolute right-8 bottom-14 max-w-md md:max-w-lg p-8 bg-[#0a1f44dd] text-white border-l-[5px] border-cyan-400 rounded-2xl z-20 backdrop-blur-xl shadow-lg transition-all duration-700 ease-in-out ${i === currentIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+              <h1 className="text-3xl md:text-4xl font-bold mb-4">{slide.title}</h1>
+              <p className="text-base md:text-lg mb-6">{slide.desc}</p>
+              <button className="px-6 py-2 text-white font-medium rounded-full bg-gradient-to-r from-cyan-600 to-cyan-400 hover:shadow-xl hover:-translate-y-1 transition">
+                {slide.btn}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Indicators */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
+        {slides.map((_, i) => (
+          <span
+            key={i}
+            className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 ${i === currentIndex ? 'w-7 bg-cyan-400 rounded-md' : 'bg-white/40'}`}
+            onClick={() => goToSlide(i)}
+          />
+        ))}
+      </div>
+
+      {/* Progress bar */}
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20">
+        <div
+          ref={progressRef}
+          className="h-full bg-gradient-to-r from-cyan-600 to-cyan-400"
+          style={{ width: '0%' }}
+        ></div>
+      </div>
+
+      {/* Custom style for diagonal blur */}
       <style jsx>{`
-        :root {
-          --navy-blue: #0a1f44;
-          --highlight: #00b8d9;
-          --light-blue: #00909e;
-          --white: #ffffff;
-        }
-
-        .hero {
-          position: relative;
-          width: 100%;
-          height: 100vh;
-          max-height: 900px;
-          min-height: 600px;
-          overflow: hidden;
-        }
-
-        .slides {
-          display: flex;
-          height: 100%;
-          transform: translateX(-${currentIndex * 100}%);
-          transition: transform 0.8s ease-in-out;
-        }
-
-        .slide {
-          position: relative;
-          flex: 0 0 100%;
-          height: 100%;
-        }
-
-        .slide img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        
-
-        .slide::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          right: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(10, 31, 68, 0.4);
+        .clip-diagonal {
           clip-path: polygon(100% 0, 100% 100%, 50% 100%);
-          backdrop-filter: blur(3px);
-          z-index: 1;
-        }
-
-        .content-box {
-          position: absolute;
-          right: 8%;
-          bottom: 14%;
-          max-width: 480px;
-          padding: 2rem;
-          background: rgba(10, 31, 68, 0.85);
-          backdrop-filter: blur(12px);
-          color: #ffffff;
-          border-left: 5px solid var(--highlight);
-          border-radius: 16px;
-          z-index: 2;
-          transform: translateY(30px);
-          opacity: 0;
-          transition: all 0.8s ease 0.3s;
-        }
-
-        .slide.active .content-box {
-          transform: translateY(0);
-          opacity: 1;
-        }
-
-        .content-box h1 {
-          margin-bottom: 1rem;
-          font-size: 2.2rem;
-          font-weight: bold;
-          color: #ffffff;
-        }
-
-        .content-box p {
-          font-size: 1.1rem;
-          margin-bottom: 1.5rem;
-          color: #ffffff;
-        }
-
-        .content-box button {
-          padding: 0.8rem 2rem;
-          font-size: 1rem;
-          background: linear-gradient(135deg, var(--light-blue), var(--highlight));
-          border: none;
-          color: #ffffff;
-          border-radius: 30px;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .content-box button:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 8px 20px rgba(0, 176, 217, 0.3);
-        }
-
-        .arrow {
-          position: absolute;
-          top: 50%;
-          transform: translateY(-50%);
-          width: 50px;
-          height: 50px;
-          background: rgba(255, 255, 255, 0.1);
-          color: #ffffff;
-          font-size: 1.5rem;
-          border-radius: 50%;
-          cursor: pointer;
-          z-index: 10;
-          border: none;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .arrow.left { left: 30px; }
-        .arrow.right { right: 30px; }
-
-        .indicator {
-          position: absolute;
-          bottom: 30px;
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
-          gap: 10px;
-          z-index: 10;
-        }
-
-        .dot {
-          width: 12px;
-          height: 12px;
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 50%;
-          cursor: pointer;
-        }
-
-        .dot.active {
-          width: 28px;
-          background: var(--highlight);
-          border-radius: 6px;
-        }
-
-        .progress-bar-container {
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 4px;
-          background: rgba(255, 255, 255, 0.15);
-        }
-
-        .progress-bar {
-          width: 0%;
-          height: 100%;
-          background: linear-gradient(to right, var(--light-blue), var(--highlight));
-        }
-
-        @media (max-width: 768px) {
-          .content-box {
-            right: 5%;
-            bottom: 10%;
-            max-width: 90%;
-            padding: 1.5rem;
-          }
-          .arrow {
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
-          }
         }
       `}</style>
-
-      <div className="hero">
-        <button className="arrow left" onClick={goToPrev}>&#8249;</button>
-        <button className="arrow right" onClick={goToNext}>&#8250;</button>
-
-        <div className="slides" ref={slidesRef}>
-          {slides.map((slide, i) => (
-            <div className={`slide ${i === currentIndex ? 'active' : ''}`} key={i}>
-              <img src={slide.img} alt={slide.title} />
-              <div className="content-box">
-                <h1>{slide.title}</h1>
-                <p>{slide.desc}</p>
-                <button>{slide.btn}</button>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="indicator">
-          {slides.map((_, i) => (
-            <span
-              key={i}
-              className={`dot ${i === currentIndex ? 'active' : ''}`}
-              onClick={() => goToSlide(i)}
-            />
-          ))}
-        </div>
-
-        <div className="progress-bar-container">
-          <div className="progress-bar" ref={progressRef}></div>
-        </div>
-      </div>
-    </>
+    </div>
   );
 }

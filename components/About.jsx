@@ -3,9 +3,6 @@ import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import Link from 'next/link';
-<Link href="/about" className="cta-button" data-aos="zoom-in" data-aos-delay="500">
-  Be Inspired by Omnitech
-</Link>
 
 const About = () => {
   useEffect(() => {
@@ -15,144 +12,64 @@ const About = () => {
   }, []);
 
   return (
-    <section className="content-section" data-aos="fade-up" id="about">
-      <div className="content-left" data-aos="fade-right">
-        <h2>About Omnitech</h2>
-        <p data-aos="fade-up" data-aos-delay="200">
+    <section
+      className="relative flex flex-col lg:flex-row items-center justify-between max-w-[1400px] mx-auto my-20 h-auto lg:h-[520px] bg-transparent rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden"
+      data-aos="fade-up"
+      id="about"
+    >
+      {/* Left Content */}
+      <div className="flex-1 px-6 py-10 lg:px-16 z-10" data-aos="fade-right">
+        <h2 className="text-[2.8rem] font-bold text-black mb-5 relative after:content-[''] after:w-[60px] after:h-1 after:bg-[#00b8d9] after:absolute after:left-0 after:-bottom-2 after:rounded">
+          About Omnitech
+        </h2>
+
+        <p className="text-[1.1rem] leading-[1.7] text-black mb-6" data-aos="fade-up" data-aos-delay="200">
           Omnitech is a leading supplier of metallurgy products designed to meet the needs of modern industries.
           Our expert solutions cater to research, production, and quality control, ensuring unmatched reliability and performance.
         </p>
-        <ul data-aos="fade-up" data-aos-delay="300">
-          <li>✅ Improves specimen preparation efficiency</li>
-          <li>✅ Frees up operator time</li>
-          <li>✅ Increased polishing quality</li>
-          <li>✅ Ensures result consistency</li>
+
+        <ul className="mb-6 space-y-3" data-aos="fade-up" data-aos-delay="300">
+          {[
+            "✅ Improves specimen preparation efficiency",
+            "✅ Frees up operator time",
+            "✅ Increased polishing quality",
+            "✅ Ensures result consistency",
+          ].map((item, index) => (
+            <li
+              key={index}
+              className="text-black text-base font-normal pl-2 transition-transform duration-300 hover:translate-x-2 hover:scale-105 hover:text-[#00b8d9] list-none"
+            >
+              {item}
+            </li>
+          ))}
         </ul>
-        <a href="#learn-more" className="cta-button" data-aos="zoom-in" data-aos-delay="500">
+
+        <Link
+          href="#learn-more"
+          className="inline-block bg-[#0a1f44] text-white py-3 px-7 rounded-full font-semibold no-underline transition-all duration-300 shadow-md hover:bg-[#00b8d9] hover:-translate-y-1"
+          data-aos="zoom-in"
+          data-aos-delay="500"
+        >
           Be Inspired by Omnitech
-        </a>
+        </Link>
       </div>
 
-      <div className="content-right" data-aos="fade-left">
-        <div className="image-slide"></div>
+      {/* Right Image Slide */}
+      <div className="flex-1 relative w-full h-[300px] lg:h-full overflow-hidden" data-aos="fade-left">
+        <div
+          className="absolute w-full h-full bg-cover bg-center transition-transform duration-500 ease-in-out hover:scale-105 hover:rotate-1 hover:brightness-110"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=1470&q=80')",
+            clipPath: 'polygon(20% 0, 100% 0, 100% 100%, 0% 100%)',
+            animation: 'slideIn 2s ease-out forwards',
+            transform: 'translateX(100%)',
+          }}
+        ></div>
       </div>
 
+      {/* Animation Keyframes */}
       <style jsx>{`
-        :root {
-          --navy: #0a1f44;
-          --blue-accent: #00b8d9;
-          --white: #ffffff;
-          --gray: #7f8c8d;
-        }
-
-        .content-section {
-          position: relative;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          max-width: 1400px;
-          margin: 80px auto;
-          height: 520px;
-          background-color: var(--white);
-          border-radius: 20px;
-          overflow: hidden;
-          box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-        }
-
-        .content-left {
-          flex: 1;
-          padding: 60px;
-          z-index: 2;
-        }
-
-        .content-left h2 {
-          font-size: 2.8rem;
-          font-weight: 700;
-          color: var(--navy);
-          margin-bottom: 20px;
-          position: relative;
-        }
-
-        .content-left h2::after {
-          content: '';
-          width: 60px;
-          height: 4px;
-          background-color: var(--blue-accent);
-          position: absolute;
-          left: 0;
-          bottom: -10px;
-          border-radius: 2px;
-        }
-
-        .content-left p {
-          font-size: 1.1rem;
-          line-height: 1.7;
-          color: var(--gray);
-          margin-bottom: 25px;
-        }
-
-        .content-left ul {
-          padding-left: 0;
-          margin-bottom: 30px;
-        }
-
-        .content-left ul li {
-          list-style: none;
-          margin-bottom: 12px;
-          font-size: 1rem;
-          color: var(--gray);
-          font-weight: 400;
-          transition: all 0.3s ease;
-          padding-left: 10px;
-        }
-
-        .content-left ul li:hover {
-          transform: translateX(10px) scale(1.05);
-          color: var(--blue-accent);
-        }
-
-        .cta-button {
-          display: inline-block;
-          background: var(--navy);
-          color: var(--white);
-          padding: 12px 28px;
-          border-radius: 50px;
-          font-weight: 600;
-          text-decoration: none;
-          transition: all 0.3s ease;
-          box-shadow: 0 5px 15px rgba(10, 31, 68, 0.2);
-        }
-
-        .cta-button:hover {
-          background: var(--blue-accent);
-          transform: translateY(-3px);
-        }
-
-        .content-right {
-          flex: 1;
-          position: relative;
-          height: 100%;
-          overflow: hidden;
-        }
-
-        .image-slide {
-          position: absolute;
-          width: 100%;
-          height: 100%;
-          background-image: url('https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=1470&q=80');
-          background-size: cover;
-          background-position: center;
-          clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
-          transform: translateX(100%);
-          animation: slideIn 2s ease-out forwards;
-          transition: transform 0.4s ease, filter 0.4s ease;
-        }
-
-        .image-slide:hover {
-          transform: scale(1.03) rotate(1deg);
-          filter: brightness(1.1);
-        }
-
         @keyframes slideIn {
           0% {
             transform: translateX(100%);
@@ -163,24 +80,10 @@ const About = () => {
         }
 
         @media (max-width: 992px) {
-          .content-section {
-            flex-direction: column;
-            height: auto;
-          }
-
-          .content-left {
-            padding: 40px 30px;
-          }
-
-          .content-right {
-            height: 300px;
-            width: 100%;
-          }
-
           .image-slide {
-            clip-path: none;
-            transform: translateY(100%);
-            animation: slideInY 1.5s ease-out forwards;
+            clip-path: none !important;
+            animation: slideInY 1.5s ease-out forwards !important;
+            transform: translateY(100%) !important;
           }
 
           @keyframes slideInY {
