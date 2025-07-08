@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import Link from 'next/link';
 
 export default function Products() {
   useEffect(() => {
@@ -17,7 +18,7 @@ export default function Products() {
   };
 
   return (
-    <div className="bg-transparent font-sans text-gray-800">
+    <div className="bg-transparent font-sans text-gray-800 dark:text-white">
       {/* Spacer */}
       <div className="h-[60px]"></div>
 
@@ -27,16 +28,16 @@ export default function Products() {
         data-aos="fade-down"
         data-aos-duration="1200"
       >
-        <h1 className="text-[36px] font-extrabold uppercase text-[#001f4d] tracking-wider drop-shadow-md">
+        <h1 className="text-[36px] font-extrabold uppercase text-[#001f4d] dark:text-blue-200 tracking-wider drop-shadow-md">
           OMNITECH MACHINES
         </h1>
-        <p className="text-[16px] mt-3 text-[#618ab5]">
+        <p className="text-[16px] mt-3 text-[#618ab5] dark:text-blue-400">
           Explore our specialized range of metallurgical machines
         </p>
       </div>
 
       {/* Search Bar */}
-      <div className="sticky top-0 z-50 bg-[#003d73]/80 px-10 py-5 shadow-md flex justify-center items-center backdrop-blur-sm">
+      <div className="sticky top-0 z-50 bg-[#003d73]/80 dark:bg-[#001e3c]/90 px-10 py-5 shadow-md flex justify-center items-center backdrop-blur-sm">
         <input
           type="text"
           placeholder="Search products..."
@@ -50,7 +51,7 @@ export default function Products() {
         {products.map((product, index) => (
           <div
             key={index}
-            className="card bg-white w-[85%] mx-auto rounded-xl shadow-lg hover:shadow-2xl transition-transform duration-300 transform hover:scale-[1.03] flex flex-col overflow-hidden"
+            className="card bg-white dark:bg-slate-900 w-[85%] mx-auto rounded-xl shadow-lg hover:shadow-2xl dark:shadow-blue-800 transition-transform duration-300 transform hover:scale-[1.03] flex flex-col overflow-hidden"
             data-aos="fade-up"
             data-aos-delay={index * 100}
           >
@@ -60,15 +61,17 @@ export default function Products() {
               className="w-full h-[180px] object-cover transition-transform duration-500 hover:scale-105"
             />
             <div className="p-4 flex-grow">
-              <h2 className="text-xl font-semibold text-[#002147] mb-2">
+              <h2 className="text-xl font-semibold text-[#002147] dark:text-blue-200 mb-2">
                 {product.title}
               </h2>
-              <p className="text-sm leading-relaxed text-[#2b2b2b]">
+              <p className="text-sm leading-relaxed text-[#2b2b2b] dark:text-gray-300">
                 {product.description}
               </p>
-              <button className="mt-4 px-4 py-2 bg-[#003d73] text-white rounded hover:bg-[#005099] font-semibold">
-                To the product range
-              </button>
+              <Link href="/products">
+                <button className="mt-4 px-4 py-2 bg-[#003d73] dark:bg-blue-700 text-white rounded hover:bg-[#005099] dark:hover:bg-blue-600 font-semibold transition-all">
+                  To the product range
+                </button>
+              </Link>
             </div>
           </div>
         ))}

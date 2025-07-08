@@ -65,8 +65,10 @@ export default function Header() {
               className="w-16 h-16 md:w-20 md:h-20 object-contain rounded-full shadow-lg hover:rotate-[360deg] transition-transform duration-700"
             />
             <div>
-              <h1 className="text-xl md:text-3xl font-black bg-gradient-to-r from-blue-700 to-gray-900 text-transparent bg-clip-text">Omnitech</h1>
-              <p className="text-xs md:text-sm text-black italic font-medium">Advanced Metallurgy Solutions</p>
+              <h1 className="text-xl md:text-3xl font-black bg-gradient-to-r from-blue-700 to-gray-900 text-transparent bg-clip-text dark:from-white dark:to-slate-300">
+                Omnitech
+              </h1>
+              <p className="text-xs md:text-sm text-black dark:text-white italic font-medium">Advanced Metallurgy Solutions</p>
             </div>
           </div>
 
@@ -75,26 +77,15 @@ export default function Header() {
               <input
                 type="text"
                 placeholder="Search products, services..."
-                className="py-2 px-4 w-[200px] md:w-[250px] outline-none text-sm text-black placeholder-slate-400 bg-transparent"
+                className="py-2 px-4 w-[200px] md:w-[250px] outline-none text-sm text-black dark:text-white placeholder-slate-400 bg-transparent"
               />
               <button className="py-2 px-4 bg-gradient-to-br from-blue-700 to-gray-900 text-white text-base">🔍</button>
             </div>
-            <div className="flex items-center gap-3">
-              <img
-                src="https://flagcdn.com/w40/in.png"
-                alt="India Flag"
-                className="w-7 h-5 rounded shadow"
-              />
-              <select className="py-2 px-3 rounded-lg border-2 border-slate-200 bg-transparent text-black font-medium hover:border-blue-600 focus:border-blue-600 focus:ring focus:ring-blue-200">
-                <option value="en">English</option>
-                <option value="hi">हिन्दी (Hindi)</option>
-                <option value="fr">Français</option>
-                <option value="de">Deutsch</option>
-                <option value="es">Español</option>
-                <option value="jp">日本語</option>
-                <option value="th">ไทย</option>
-              </select>
-            </div>
+            <img
+              src="https://flagcdn.com/w40/in.png"
+              alt="India Flag"
+              className="w-7 h-5 rounded shadow"
+            />
           </div>
 
           <div className="absolute -bottom-6 left-6 bg-gradient-to-r from-blue-700 to-gray-900 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg whitespace-nowrap before:content-['✨'] before:mr-2">
@@ -104,8 +95,8 @@ export default function Header() {
       </div>
 
       {/* Sticky NavBar */}
-      <nav className="sticky top-0 z-[200] bg-gradient-to-br from-gray-900 to-slate-800 text-white font-bold px-4 py-3 shadow-xl rounded-b-2xl">
-        <div className="flex justify-between items-center">
+      <nav className="sticky top-0 z-[200] bg-gradient-to-br from-gray-900 to-slate-800 dark:from-white dark:to-slate-200 text-white dark:text-black font-bold px-4 py-3 shadow-xl rounded-b-2xl">
+        <div className="flex justify-between items-center md:justify-start md:gap-8">
           {/* All Products Dropdown */}
           <div
             className="bg-gradient-to-r from-blue-600 to-blue-500 py-2 px-4 rounded-full shadow hover:-translate-y-1 transition-all cursor-pointer relative"
@@ -113,11 +104,11 @@ export default function Header() {
           >
             ☰ ALL PRODUCTS
             {dropdownOpen && (
-              <div className="absolute top-[110%] left-0 w-56 bg-white/5 text-black rounded-lg shadow-md py-2 z-50 backdrop-blur-md border border-slate-200">
+              <div className="absolute top-[110%] left-0 w-56 bg-white dark:bg-slate-800 text-black dark:text-white rounded-lg shadow-md py-2 z-50 border border-slate-300 dark:border-slate-600">
                 {productDropdown.map((item) => (
                   <div
                     key={item}
-                    className="px-4 py-2 hover:bg-blue-100/50 cursor-pointer"
+                    className="px-4 py-2 hover:bg-blue-100/50 dark:hover:bg-blue-900/50 cursor-pointer"
                     onClick={() => setDropdownOpen(false)}
                   >
                     {item}
@@ -127,9 +118,31 @@ export default function Header() {
             )}
           </div>
 
-          {/* Hamburger Icon */}
+          {/* Navigation Links */}
+          <div className="hidden md:flex gap-6 ml-4">
+            {menuItems.map((item) => {
+              const path = item === 'HOME' ? '/' : `/${item.toLowerCase()}`;
+              return (
+                <Link href={path} key={item}>
+                  <span
+                    className={`relative uppercase tracking-wide text-xs cursor-pointer transition-all py-1 block ${
+                      activeMenu === item ? 'text-blue-300 dark:text-blue-700' : 'hover:text-blue-400 dark:hover:text-blue-600'
+                    } ${activeMenu === item ? 'after:w-full' : 'after:w-0'} after:transition-all after:duration-300 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[2px] after:bg-gradient-to-r from-blue-600 to-blue-400`}
+                    onClick={() => {
+                      setActiveMenu(item);
+                      setNavOpen(false);
+                    }}
+                  >
+                    {item}
+                  </span>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Mobile Nav Toggle */}
           <button
-            className="md:hidden text-white text-xl"
+            className="md:hidden text-white dark:text-black text-xl ml-auto"
             onClick={() => setNavOpen(!navOpen)}
             aria-label="Toggle navigation"
           >
@@ -137,15 +150,15 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Navigation Links */}
-        <div className={`flex-col md:flex md:flex-row gap-4 md:gap-8 mt-4 md:mt-0 ${navOpen ? 'flex' : 'hidden'} md:items-center`}>
+        {/* Mobile Navigation Links */}
+        <div className={`md:hidden flex-col gap-4 mt-4 ${navOpen ? 'flex' : 'hidden'} items-start`}>
           {menuItems.map((item) => {
             const path = item === 'HOME' ? '/' : `/${item.toLowerCase()}`;
             return (
               <Link href={path} key={item}>
                 <span
                   className={`relative uppercase tracking-wide text-xs cursor-pointer transition-all py-1 block ${
-                    activeMenu === item ? 'text-blue-300' : 'hover:text-blue-400'
+                    activeMenu === item ? 'text-blue-300 dark:text-blue-700' : 'hover:text-blue-400 dark:hover:text-blue-600'
                   } ${activeMenu === item ? 'after:w-full' : 'after:w-0'} after:transition-all after:duration-300 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[2px] after:bg-gradient-to-r from-blue-600 to-blue-400`}
                   onClick={() => {
                     setActiveMenu(item);

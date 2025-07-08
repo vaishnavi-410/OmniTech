@@ -19,11 +19,11 @@ const About = () => {
     >
       {/* Left Content */}
       <div className="flex-1 px-6 py-10 lg:px-16 z-10" data-aos="fade-right">
-        <h2 className="text-[2.8rem] font-bold text-black mb-5 relative after:content-[''] after:w-[60px] after:h-1 after:bg-[#00b8d9] after:absolute after:left-0 after:-bottom-2 after:rounded">
+        <h2 className="text-[2.8rem] font-bold text-black dark:text-white mb-5 relative after:content-[''] after:w-[60px] after:h-1 after:bg-[#00b8d9] after:absolute after:left-0 after:-bottom-2 after:rounded">
           About Omnitech
         </h2>
 
-        <p className="text-[1.1rem] leading-[1.7] text-black mb-6" data-aos="fade-up" data-aos-delay="200">
+        <p className="text-[1.1rem] leading-[1.7] text-black dark:text-white mb-6" data-aos="fade-up" data-aos-delay="200">
           Omnitech is a leading supplier of metallurgy products designed to meet the needs of modern industries.
           Our expert solutions cater to research, production, and quality control, ensuring unmatched reliability and performance.
         </p>
@@ -37,7 +37,7 @@ const About = () => {
           ].map((item, index) => (
             <li
               key={index}
-              className="text-black text-base font-normal pl-2 transition-transform duration-300 hover:translate-x-2 hover:scale-105 hover:text-[#00b8d9] list-none"
+              className="text-black dark:text-white text-base font-normal pl-2 transition-transform duration-300 hover:translate-x-2 hover:scale-105 hover:text-[#00b8d9] list-none"
             >
               {item}
             </li>
@@ -46,7 +46,7 @@ const About = () => {
 
         <Link
           href="#learn-more"
-          className="inline-block bg-[#0a1f44] text-white py-3 px-7 rounded-full font-semibold no-underline transition-all duration-300 shadow-md hover:bg-[#00b8d9] hover:-translate-y-1"
+          className="inline-block bg-[#0a1f44] dark:bg-white dark:text-black text-white py-3 px-7 rounded-full font-semibold no-underline transition-all duration-300 shadow-md hover:bg-[#00b8d9] dark:hover:bg-[#00b8d9] hover:-translate-y-1"
           data-aos="zoom-in"
           data-aos-delay="500"
         >

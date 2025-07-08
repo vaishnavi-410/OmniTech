@@ -8,7 +8,7 @@ const brandLogos = [
   "https://upload.wikimedia.org/wikipedia/commons/5/56/Universit%C3%A4tsklinikum_M%C3%BCnster_Logo.svg",
   "https://brandlogos.net/wp-content/uploads/2022/04/honda_motor-logo-brandlogos.net_.png",
   "https://cdn.iconscout.com/icon/free/png-256/free-siemens-logo-icon-285232.png",
-  "https://cdn.freebiesupply.com/logos/large/2x/nissan-6-logo-svg-vector.svg",
+  "https://car-brand-names.com/wp-content/uploads/2015/05/Infiniti-Logo-1989.png",
   "https://logowik.com/content/uploads/images/yutaka1144.jpg",
   "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Logo_Hochformat_NUR_STAHLWERK.jpg/1200px-Logo_Hochformat_NUR_STAHLWERK.jpg",
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_IGZXfhnwUw9Qi5iCV5MtMNqLsqsTLeOt6Q&s",
