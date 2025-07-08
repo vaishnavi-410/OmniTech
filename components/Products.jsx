@@ -23,28 +23,28 @@ export default function Products() {
       <div className="h-[60px]"></div>
 
       <div className="text-center px-5 py-10" data-aos="fade-down" data-aos-duration="1200">
-        <h1 className="text-[36px] font-extrabold uppercase text-[#001f4d] dark:text-blue-200 tracking-wider drop-shadow-md">
+        <h1 className="text-[32px] sm:text-[36px] font-extrabold uppercase text-[#001f4d] dark:text-blue-200 tracking-wider drop-shadow-md">
           OMNITECH MACHINES
         </h1>
-        <p className="text-[16px] mt-3 text-[#618ab5] dark:text-blue-400">
+        <p className="text-[15px] sm:text-[16px] mt-3 text-[#618ab5] dark:text-blue-400">
           Explore our specialized range of metallurgical machines
         </p>
       </div>
 
-      <div className="sticky top-0 z-50 bg-[#003d73]/80 dark:bg-[#001e3c]/90 px-10 py-5 shadow-md flex justify-center items-center backdrop-blur-sm">
+      <div className="sticky top-0 z-50 bg-[#003d73]/80 dark:bg-[#001e3c]/90 px-4 sm:px-10 py-5 shadow-md flex justify-center items-center backdrop-blur-sm">
         <input
           type="text"
           placeholder="Search products..."
           onChange={filterCards}
-          className="w-[280px] px-4 py-2 text-sm text-white bg-transparent border border-[#00f0ff] rounded-lg placeholder-[#b0eaff] shadow-[0_0_10px_#00f0ff] focus:outline-none focus:shadow-[0_0_15px_#00f0ff,0_0_5px_#00f0ff_inset]"
+          className="w-full max-w-[300px] px-4 py-2 text-sm text-white bg-transparent border border-[#00f0ff] rounded-lg placeholder-[#b0eaff] shadow-[0_0_10px_#00f0ff] focus:outline-none focus:shadow-[0_0_15px_#00f0ff,0_0_5px_#00f0ff_inset]"
         />
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-[60px] p-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 md:gap-[60px] p-5 sm:p-10">
         {products.map((product, index) => (
           <div
             key={index}
-            className="card bg-white dark:bg-slate-900 w-[85%] mx-auto rounded-xl shadow-lg hover:shadow-2xl dark:shadow-blue-800 transition-transform duration-300 transform hover:scale-[1.03] flex flex-col overflow-hidden"
+            className="card bg-white dark:bg-slate-900 w-full max-w-[500px] mx-auto rounded-xl shadow-lg hover:shadow-2xl dark:shadow-blue-800 transition-transform duration-300 transform hover:scale-[1.03] flex flex-col overflow-hidden"
             data-aos="fade-up"
             data-aos-delay={index * 100}
           >
@@ -82,7 +82,7 @@ const products = [
   },
   {
     title: 'Mounting Equipment',
-    image: 'https://media.gettyimages.com/id/510162486/photo/production-line-of-plastic-industry.jpg',
+    image: 'https://www.bosch-pt.co.in/in/en/ocsmedia/461415-82/application-image/720x410/pro-steel-mounted-point-set-3090822.png',
     description: 'Omnitech’s mounting presses ensure stable sample embedding. Available in hot and UV variants...',
   },
   {
@@ -97,7 +97,7 @@ const products = [
   },
   {
     title: 'Hardness Testers',
-    image: 'https://struers-web-production-17090b-cd-us.azurewebsites.net/-/media/.../HAT-accessories.png',
+    image: 'https://analab.co.in/files/catalog/Final_Image_&_Catalogues/Tablet_Hardness_Tester/Compressed_Image/Portable-Tablet-Hardness-Tester-5-THCal10_KB.jpg',
     description: 'Our machines support Rockwell, Vickers, Knoop, and Brinell testing methods...',
   },
   {

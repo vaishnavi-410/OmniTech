@@ -34,7 +34,7 @@ export default function Header() {
           {particles.map((p) => (
             <div
               key={p.id}
-              className="absolute w-1 h-1 bg-white rounded-full opacity-60 animate-particleFloat"
+              className="absolute w-1 h-1 rounded-full animate-particleFloat bg-slate-300 dark:bg-white opacity-60 dark:opacity-30"
               style={{
                 left: p.left,
                 animationDuration: p.duration,
@@ -47,16 +47,16 @@ export default function Header() {
 
       {/* Top Info Bar */}
       <div className="relative z-[100] bg-transparent backdrop-blur-md">
-        <div className="bg-gradient-to-r from-blue-800/90 to-gray-900/90 px-4 py-2 flex flex-col md:flex-row md:justify-between items-center text-white text-sm font-medium border-b border-blue-500/20 gap-2">
+        <div className="bg-gradient-to-r from-blue-800/90 to-gray-900/90 px-4 py-2 flex flex-col md:flex-row md:justify-between items-center text-white text-sm font-medium border-b border-blue-500/20 gap-2 text-center">
           <div className="flex items-center gap-2 before:content-['📞'] before:animate-pulse">
             Hotline (+91) 44-2688 0737
           </div>
-          <div className="text-xs opacity-90 text-center">
+          <div className="text-xs opacity-90">
             🌟 Premium Metallurgy Solutions | Trusted Since 1995
           </div>
         </div>
 
-        {/* Logo and Search */}
+        {/* Logo & Search */}
         <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-6 relative gap-6">
           <div className="flex items-center gap-4 cursor-pointer transition-transform hover:scale-105">
             <img
@@ -81,23 +81,19 @@ export default function Header() {
               />
               <button className="py-2 px-4 bg-gradient-to-br from-blue-700 to-gray-900 text-white text-base">🔍</button>
             </div>
-            <img
-              src="https://flagcdn.com/w40/in.png"
-              alt="India Flag"
-              className="w-7 h-5 rounded shadow"
-            />
+            <img src="https://flagcdn.com/w40/in.png" alt="India Flag" className="w-7 h-5 rounded shadow" />
           </div>
 
-          <div className="absolute -bottom-6 left-6 bg-gradient-to-r from-blue-700 to-gray-900 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg whitespace-nowrap before:content-['✨'] before:mr-2">
+          <div className="absolute -bottom-6 left-6 bg-gradient-to-r from-blue-700 to-gray-900 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg whitespace-nowrap before:content-['✨'] before:mr-2 max-w-full overflow-x-auto">
             Empowering Innovation | Excellence in Metallurgy
           </div>
         </div>
       </div>
 
-      {/* Sticky NavBar */}
+      {/* Navigation */}
       <nav className="sticky top-0 z-[200] bg-gradient-to-br from-gray-900 to-slate-800 dark:from-white dark:to-slate-200 text-white dark:text-black font-bold px-4 py-3 shadow-xl rounded-b-2xl">
         <div className="flex justify-between items-center md:justify-start md:gap-8">
-          {/* All Products Dropdown */}
+          {/* Dropdown */}
           <div
             className="bg-gradient-to-r from-blue-600 to-blue-500 py-2 px-4 rounded-full shadow hover:-translate-y-1 transition-all cursor-pointer relative"
             onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -118,7 +114,7 @@ export default function Header() {
             )}
           </div>
 
-          {/* Navigation Links */}
+          {/* Desktop Menu */}
           <div className="hidden md:flex gap-6 ml-4">
             {menuItems.map((item) => {
               const path = item === 'HOME' ? '/' : `/${item.toLowerCase()}`;
@@ -126,8 +122,12 @@ export default function Header() {
                 <Link href={path} key={item}>
                   <span
                     className={`relative uppercase tracking-wide text-xs cursor-pointer transition-all py-1 block ${
-                      activeMenu === item ? 'text-blue-300 dark:text-blue-700' : 'hover:text-blue-400 dark:hover:text-blue-600'
-                    } ${activeMenu === item ? 'after:w-full' : 'after:w-0'} after:transition-all after:duration-300 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[2px] after:bg-gradient-to-r from-blue-600 to-blue-400`}
+                      activeMenu === item
+                        ? 'text-blue-300 dark:text-blue-700'
+                        : 'hover:text-blue-400 dark:hover:text-blue-600'
+                    } ${
+                      activeMenu === item ? 'after:w-full' : 'after:w-0'
+                    } after:transition-all after:duration-300 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[2px] after:bg-gradient-to-r from-blue-600 to-blue-400`}
                     onClick={() => {
                       setActiveMenu(item);
                       setNavOpen(false);
@@ -150,7 +150,7 @@ export default function Header() {
           </button>
         </div>
 
-        {/* Mobile Navigation Links */}
+        {/* Mobile Menu */}
         <div className={`md:hidden flex-col gap-4 mt-4 ${navOpen ? 'flex' : 'hidden'} items-start`}>
           {menuItems.map((item) => {
             const path = item === 'HOME' ? '/' : `/${item.toLowerCase()}`;
@@ -158,8 +158,12 @@ export default function Header() {
               <Link href={path} key={item}>
                 <span
                   className={`relative uppercase tracking-wide text-xs cursor-pointer transition-all py-1 block ${
-                    activeMenu === item ? 'text-blue-300 dark:text-blue-700' : 'hover:text-blue-400 dark:hover:text-blue-600'
-                  } ${activeMenu === item ? 'after:w-full' : 'after:w-0'} after:transition-all after:duration-300 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[2px] after:bg-gradient-to-r from-blue-600 to-blue-400`}
+                    activeMenu === item
+                      ? 'text-blue-300 dark:text-blue-700'
+                      : 'hover:text-blue-400 dark:hover:text-blue-600'
+                  } ${
+                    activeMenu === item ? 'after:w-full' : 'after:w-0'
+                  } after:transition-all after:duration-300 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[2px] after:bg-gradient-to-r from-blue-600 to-blue-400`}
                   onClick={() => {
                     setActiveMenu(item);
                     setNavOpen(false);
@@ -173,21 +177,41 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Tailwind Custom Animations */}
+      {/* Custom Animations */}
       <style jsx>{`
         @keyframes float {
-          0%, 100% { transform: translateY(0) rotate(0deg); }
-          50% { transform: translateY(-20px) rotate(180deg); }
+          0%, 100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-20px) rotate(180deg);
+          }
         }
-        .animate-float { animation: float 6s ease-in-out infinite; }
+
+        .animate-float {
+          animation: float 6s ease-in-out infinite;
+        }
 
         @keyframes particleFloat {
-          0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+          0% {
+            transform: translateY(100vh) rotate(0deg);
+            opacity: 0;
+          }
+          10% {
+            opacity: 1;
+          }
+          90% {
+            opacity: 1;
+          }
+          100% {
+            transform: translateY(-100px) rotate(360deg);
+            opacity: 0;
+          }
         }
-        .animate-particleFloat { animation: particleFloat 8s linear infinite; }
+
+        .animate-particleFloat {
+          animation: particleFloat 8s linear infinite;
+        }
       `}</style>
     </>
   );

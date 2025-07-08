@@ -35,7 +35,7 @@ export default function TrustedBrands() {
         <h2 className="text-2xl md:text-3xl font-semibold uppercase text-[#182c6c] mb-4">
           Global brands that place their trust in our equipment and services
         </h2>
-        <p className="max-w-4xl mx-auto mb-10 text-base leading-relaxed">
+        <p className="max-w-4xl mx-auto mb-10 text-base leading-relaxed text-gray-700">
           We are proud of the strong partnerships that we have built with
           leading industrial brands, prestigious universities, and respected
           research establishments. They demand a supplier with global reach,
@@ -45,11 +45,11 @@ export default function TrustedBrands() {
         <div className="overflow-hidden relative w-full">
           <div className="marquee-track flex w-max">
             {[...brandLogos, ...brandLogos].map((logo, index) => (
-              <div key={index} className="flex-shrink-0 px-6 md:px-10">
+              <div key={index} className="flex-shrink-0 px-4 sm:px-6 md:px-10 py-2">
                 <img
                   src={logo}
                   alt={`Brand-${index}`}
-                  className="max-h-24 md:max-h-28 max-w-[200px] object-contain grayscale hover:grayscale-0 hover:scale-105 transition-all duration-300"
+                  className="max-h-16 sm:max-h-20 md:max-h-24 max-w-[180px] object-contain grayscale hover:grayscale-0 hover:scale-105 transition-all duration-300"
                 />
               </div>
             ))}
@@ -57,7 +57,6 @@ export default function TrustedBrands() {
         </div>
       </section>
 
-      {/* SCROLL ANIMATION INSIDE COMPONENT */}
       <style jsx>{`
         .marquee-track {
           animation: scroll-left 25s linear infinite;
@@ -69,6 +68,13 @@ export default function TrustedBrands() {
           }
           100% {
             transform: translateX(-50%);
+          }
+        }
+
+        @media (max-width: 640px) {
+          .marquee-track img {
+            max-height: 64px;
+            max-width: 120px;
           }
         }
       `}</style>

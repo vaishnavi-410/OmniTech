@@ -44,9 +44,14 @@ export default function Footer() {
         <div data-aos="fade-up">
           <h3 className="text-xl font-semibold mb-4 border-b-2 border-[#00aced] inline-block">Helpful Links</h3>
           <ul className="space-y-2 mt-4 text-sm">
-            {['Products', 'Training', 'Careers', 'Blog', 'Support'].map(link => (
+            {['About', 'Products', 'Services', 'Training', 'Contact'].map(link => (
               <li key={link}>
-                <a href={`/${link.toLowerCase()}`} target="_blank" className="text-gray-300 hover:text-[#00aced] transition duration-300 ease-in-out">{link}</a>
+                <a
+                  href={`/${link.toLowerCase()}`}
+                  className="text-gray-300 hover:text-[#00aced] transition duration-300 ease-in-out"
+                >
+                  {link}
+                </a>
               </li>
             ))}
           </ul>
@@ -57,7 +62,7 @@ export default function Footer() {
           <ul className="space-y-2 mt-4 text-sm">
             {['Terms of Service', 'Privacy Policy', 'Return Policy', 'Warranty', 'Cookie Notice'].map(link => (
               <li key={link}>
-                <a href={`/${link.toLowerCase().replace(/ /g, '-')}`} target="_blank" className="text-gray-300 hover:text-[#00aced] transition duration-300 ease-in-out">{link}</a>
+                <a href={`/${link.toLowerCase().replace(/ /g, '-')}`} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-[#00aced] transition duration-300 ease-in-out">{link}</a>
               </li>
             ))}
           </ul>
@@ -65,18 +70,28 @@ export default function Footer() {
 
         <div data-aos="fade-up">
           <h3 className="text-xl font-semibold mb-4 border-b-2 border-[#00aced] inline-block">Connect With Us</h3>
-          <div className="flex gap-3 mt-4">
-            {['facebook-f', 'x-twitter', 'instagram', 'youtube', 'linkedin-in'].map(icon => (
-              <a key={icon} href="#" className="w-10 h-10 flex items-center justify-center bg-white/10 text-white rounded-full hover:bg-[#00aced] transition hover:scale-110 shadow">
-                <i className={`fab fa-${icon}`}></i>
-              </a>
-            ))}
+          <div className="flex gap-3 mt-4 flex-wrap">
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center bg-white/10 text-white rounded-full hover:bg-[#00aced] transition hover:scale-110 shadow">
+              <i className="fab fa-facebook-f"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center bg-white/10 text-white rounded-full hover:bg-[#00aced] transition hover:scale-110 shadow">
+              <i className="fab fa-x-twitter"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center bg-white/10 text-white rounded-full hover:bg-[#00aced] transition hover:scale-110 shadow">
+              <i className="fab fa-instagram"></i>
+            </a>
+            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center bg-white/10 text-white rounded-full hover:bg-[#00aced] transition hover:scale-110 shadow">
+              <i className="fab fa-youtube"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center bg-white/10 text-white rounded-full hover:bg-[#00aced] transition hover:scale-110 shadow">
+              <i className="fab fa-linkedin-in"></i>
+            </a>
           </div>
-          <a href="/calendar-contest" target="_blank" className="inline-block mt-4 text-sm text-[#00aced] hover:text-white transition">Learn More</a>
+          <a href="/calendar-contest" target="_blank" rel="noopener noreferrer" className="inline-block mt-4 text-sm text-[#00aced] hover:text-white transition">Learn More</a>
 
           <div className="mt-6">
             <h4 className="text-sm font-medium mb-2">Subscribe to Our Newsletter</h4>
-            <form action="https://docs.google.com/forms/d/e/1FAIpQLSfq_UcND-test-url/viewform" target="_blank" className="flex flex-col gap-2">
+            <form action="https://docs.google.com/forms/d/e/1FAIpQLSfq_UcND-test-url/viewform" target="_blank" rel="noopener noreferrer" className="flex flex-col gap-2">
               <input type="email" placeholder="Enter your email" required className="p-2 rounded-full w-full bg-white text-black placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00aced]" />
               <button type="submit" className="bg-gradient-to-r from-[#00aced] to-[#1e90ff] text-white px-4 py-2 rounded-full hover:from-[#0084b4] hover:to-[#0066cc] transition">Subscribe</button>
             </form>
@@ -85,7 +100,7 @@ export default function Footer() {
       </div>
 
       <div className="mt-12 pt-6 border-t border-white/10 text-sm text-gray-300 text-center relative z-10 flex flex-col md:flex-row justify-center items-center gap-4">
-        <a href="https://wa.me/919876543210?text=Hi%20OmniTech%20Team!%20I%20have%20a%20question." target="_blank" className="w-10 h-10 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition animate-pulse">
+        <a href="https://wa.me/919876543210?text=Hi%20OmniTech%20Team!%20I%20have%20a%20question." target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gradient-to-r from-[#25D366] to-[#128C7E] text-white rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition animate-pulse">
           <i className="fab fa-whatsapp"></i>
         </a>
         <p>&copy; 2025 OmniTech. All rights reserved. | Pune, India | +91 98765 43210</p>

@@ -19,11 +19,15 @@ const About = () => {
     >
       {/* Left Content */}
       <div className="flex-1 px-6 py-10 lg:px-16 z-10" data-aos="fade-right">
-        <h2 className="text-[2.8rem] font-bold text-black dark:text-white mb-5 relative after:content-[''] after:w-[60px] after:h-1 after:bg-[#00b8d9] after:absolute after:left-0 after:-bottom-2 after:rounded">
+        <h2 className="text-[2.2rem] sm:text-[2.5rem] md:text-[2.8rem] font-bold text-black dark:text-white mb-5 relative after:content-[''] after:w-[60px] after:h-1 after:bg-[#00b8d9] after:absolute after:left-0 after:-bottom-2 after:rounded">
           About Omnitech
         </h2>
 
-        <p className="text-[1.1rem] leading-[1.7] text-black dark:text-white mb-6" data-aos="fade-up" data-aos-delay="200">
+        <p
+          className="text-[1rem] sm:text-[1.05rem] md:text-[1.1rem] leading-[1.7] text-black dark:text-white mb-6"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
           Omnitech is a leading supplier of metallurgy products designed to meet the needs of modern industries.
           Our expert solutions cater to research, production, and quality control, ensuring unmatched reliability and performance.
         </p>
@@ -45,7 +49,7 @@ const About = () => {
         </ul>
 
         <Link
-          href="#learn-more"
+          href="/about"
           className="inline-block bg-[#0a1f44] dark:bg-white dark:text-black text-white py-3 px-7 rounded-full font-semibold no-underline transition-all duration-300 shadow-md hover:bg-[#00b8d9] dark:hover:bg-[#00b8d9] hover:-translate-y-1"
           data-aos="zoom-in"
           data-aos-delay="500"
@@ -55,9 +59,12 @@ const About = () => {
       </div>
 
       {/* Right Image Slide */}
-      <div className="flex-1 relative w-full h-[300px] lg:h-full overflow-hidden" data-aos="fade-left">
+      <div
+        className="flex-1 relative w-full h-[300px] sm:h-[350px] lg:h-full overflow-hidden"
+        data-aos="fade-left"
+      >
         <div
-          className="absolute w-full h-full bg-cover bg-center transition-transform duration-500 ease-in-out hover:scale-105 hover:rotate-1 hover:brightness-110"
+          className="absolute w-full h-full bg-cover bg-center transition-transform duration-500 ease-in-out hover:scale-105 hover:rotate-1 hover:brightness-110 image-slide"
           style={{
             backgroundImage:
               "url('https://images.unsplash.com/photo-1603791440384-56cd371ee9a7?auto=format&fit=crop&w=1470&q=80')",
@@ -79,7 +86,7 @@ const About = () => {
           }
         }
 
-        @media (max-width: 992px) {
+        @media (max-width: 1024px) {
           .image-slide {
             clip-path: none !important;
             animation: slideInY 1.5s ease-out forwards !important;
