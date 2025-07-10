@@ -1,0 +1,157 @@
+.container {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0 auto;
+  padding: 50px 20px;
+  max-width: 1100px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.description {
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 30px;
+  max-width: 600px;
+}
+
+.sectionTitle {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+.sectionTitle::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background-color: #000;
+}
+
+.flexRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.box {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 20px;
+  flex: 1;
+  min-width: 280px;
+}
+
+.getInTouch input,
+.getInTouch textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row input {
+  flex: 1;
+}
+
+.getInTouch input:focus,
+.getInTouch textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(217, 0, 27, 0.3);
+  border-color: #d9001b;
+}
+
+.sendButton {
+  background-color: #d9001b;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+  max-width: 200px;
+}
+
+.sendButton:hover {
+  background-color: #b30018;
+}
+
+.contactGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.contactCard {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 15px;
+}
+
+.contactCard p {
+  margin: 0;
+}
+
+@media (max-width: 800px) {
+  .contactGroup {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .contactCard {
+    flex: 1 1 45%;
+  }
+}
+
+@media (max-width: 600px) {
+  .sendButton {
+    width: 100%;
+  }
+
+  .contactCard {
+    flex: 1 1 100%;
+  }
+}
+.box table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.box table td {
+  padding: 8px 0;
+  font-size: 16px;
+  color: #333;
+  vertical-align: top;
+}
+
+.box table td:first-child {
+  width: 50%;
+  font-weight: 500;
+  text-align: left;
+}
+
+.box table td:last-child {
+  width: 50%;
+  text-align: left;
+}
