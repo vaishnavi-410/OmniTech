@@ -1,13 +1,10 @@
-"use client";
-
-import Layout from "./src/layout";   // 👈 your custom layout with header/footer
-import Page from "./src/page";       // 👈 your actual About Us content
-import "./src/globals.css";          // 👈 your custom styles and animations
+// app/about/page.jsx
 
 export default function AboutPage() {
   return (
-    <Layout>
-      <Page />
-    </Layout>
+    <div style={{ padding: '80px', fontFamily: 'sans-serif' }}>
+      <h1>About Omnitech</h1>
+      <p>This is the full About page with detailed information about Omnitech and its offerings.</p>
+    </div>
   );
 }
