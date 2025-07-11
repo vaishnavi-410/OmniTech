@@ -9,36 +9,37 @@ export default function HomeSection() {
   const [isPlaying, setIsPlaying] = useState(true);
   const intervalRef = useRef(null);
 
-  const slides = [
-    {
-      img: 'https://www.etasis.com.tr/en/wp-content/uploads/2023/08/1-1024x576-1.jpg',
-      title: 'Precision Machines',
-      desc: 'High accuracy for advanced manufacturing with our state-of-the-art industrial equipment.',
-      btn: 'Learn More',
-      link: '/learn-more',
-    },
-    {
-      img: 'https://interlakemecalux.cdnwm.com/blog/img/robotic-arms-functions.1.1.jpg',
-      title: 'Automation Systems',
-      desc: 'Streamlining processes for maximum efficiency with cutting-edge robotic solutions.',
-      btn: 'Discover',
-      link: '/discover',
-    },
-    {
-      img: 'https://cdn.prod.website-files.com/6602a4b67bdde9cb5f763066/67ac650a7de69f504720bcf3_shutterstock_team-3-1120x630.jpeg',
-      title: 'Smart Factories',
-      desc: 'Transforming production lines into intelligent Industry 4.0 systems with IoT integration.',
-      btn: 'Explore',
-      link: '/explore',
-    },
-    {
-      img: 'https://plus.unsplash.com/premium_photo-1661877153361-ef5e3b108237?q=80&w=1170&auto=format&fit=crop',
-      title: 'Eco-Friendly Solutions',
-      desc: 'Building sustainable technologies for a greener industrial future.',
-      btn: 'Get Started',
-      link: '/get-started',
-    },
-  ];
+const slides = [
+  {
+    img: '/images/slider/slide1.jpg',
+    title: 'Precision Machines',
+    desc: 'High accuracy for advanced manufacturing with our state-of-the-art industrial equipment.',
+    btn: 'Learn More',
+    link: '/learn-more',
+  },
+  {
+    img: '/images/slider/slide2.jpg',
+    title: 'Automation Systems',
+    desc: 'Streamlining processes for maximum efficiency with cutting-edge robotic solutions.',
+    btn: 'Discover',
+    link: '/discover',
+  },
+  {
+    img: '/images/slider/slide3.jpg',
+    title: 'Smart Factories',
+    desc: 'Transforming production lines into intelligent Industry 4.0 systems with IoT integration.',
+    btn: 'Explore',
+    link: '/explore',
+  },
+  {
+    img: '/images/slider/slide4.jpg',
+    title: 'Eco-Friendly Solutions',
+    desc: 'Building sustainable technologies for a greener industrial future.',
+    btn: 'Get Started',
+    link: '/get-started',
+  },
+];
+
 
   const startProgressBar = () => {
     if (progressRef.current) {

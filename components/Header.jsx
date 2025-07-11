@@ -1,6 +1,36 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import DesktopMenu from './DesktopMenu';
+import MobMenu from './MobMenu';
+import { Menus } from '@/utils/menus';
+
+export function Navbar() {
+  return (
+    <nav className="bg-gradient-to-r from-[#000080] via-[#000099] to-[#0000CD] text-gray-100 h-16 sticky top-0 z-50 shadow">
+      <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-full">
+        {/* Desktop Menu aligned to the left */}
+        <ul className="relative hidden lg:flex items-center gap-6">
+          {Menus.map((menu, i) => (
+            <DesktopMenu key={i} menu={menu} />
+          ))}
+        </ul>
+
+        {/* Right: Sign In button and Mobile Menu */}
+        <div className="flex items-center gap-4">
+          <button className="bg-[#CBD5E1] text-[#000080] px-3 py-1.5 rounded-xl hover:bg-white transition text-sm">
+            Sign In
+          </button>
+
+          {/* Mobile Menu */}
+          <div className="lg:hidden">
+            <MobMenu Menus={Menus} />
+          </div>
+        </div>
+      </div>
+    </nav>
+  );
+}
 
 export default function Header() {
   const [activeMenu, setActiveMenu] = useState('HOME');
@@ -17,9 +47,6 @@ export default function Header() {
     }));
     setParticles(particleArray);
   }, []);
-
-  const menuItems = ['HOME', 'ABOUT', 'PRODUCTS', 'SERVICES', 'TRAINING', 'CONTACT'];
-  const productDropdown = ['Cutting Machines', 'Mounting Machines', 'Hardness Testers'];
 
   return (
     <>
@@ -45,8 +72,8 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Top Info Bar */}
-      <div className="relative z-[100] bg-transparent backdrop-blur-md">
+      {/* Top Info Bar + Logo Section */}
+      <div className="relative z-[40] bg-transparent backdrop-blur-md">
         <div className="bg-gradient-to-r from-blue-800/90 to-gray-900/90 px-4 py-2 flex flex-col md:flex-row md:justify-between items-center text-white text-sm font-medium border-b border-blue-500/20 gap-2 text-center">
           <div className="flex items-center gap-2 before:content-['📞'] before:animate-pulse">
             Hotline (+91) 44-2688 0737
@@ -56,7 +83,6 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Logo & Search */}
         <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-6 relative gap-6">
           <div className="flex items-center gap-4 cursor-pointer transition-transform hover:scale-105">
             <img
@@ -68,7 +94,9 @@ export default function Header() {
               <h1 className="text-xl md:text-3xl font-black bg-gradient-to-r from-blue-700 to-gray-900 text-transparent bg-clip-text dark:from-white dark:to-slate-300">
                 Omnitech
               </h1>
-              <p className="text-xs md:text-sm text-black dark:text-white italic font-medium">Advanced Metallurgy Solutions</p>
+              <p className="text-xs md:text-sm text-black dark:text-white italic font-medium">
+                Advanced Metallurgy Solutions
+              </p>
             </div>
           </div>
 
@@ -90,92 +118,8 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Navigation */}
-      <nav className="sticky top-0 z-[200] bg-gradient-to-br from-gray-900 to-slate-800 dark:from-white dark:to-slate-200 text-white dark:text-black font-bold px-4 py-3 shadow-xl rounded-b-2xl">
-        <div className="flex justify-between items-center md:justify-start md:gap-8">
-          {/* Dropdown */}
-          <div
-            className="bg-gradient-to-r from-blue-600 to-blue-500 py-2 px-4 rounded-full shadow hover:-translate-y-1 transition-all cursor-pointer relative"
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-          >
-            ☰ ALL PRODUCTS
-            {dropdownOpen && (
-              <div className="absolute top-[110%] left-0 w-56 bg-white dark:bg-slate-800 text-black dark:text-white rounded-lg shadow-md py-2 z-50 border border-slate-300 dark:border-slate-600">
-                {productDropdown.map((item) => (
-                  <div
-                    key={item}
-                    className="px-4 py-2 hover:bg-blue-100/50 dark:hover:bg-blue-900/50 cursor-pointer"
-                    onClick={() => setDropdownOpen(false)}
-                  >
-                    {item}
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:flex gap-6 ml-4">
-            {menuItems.map((item) => {
-              const path = item === 'HOME' ? '/' : `/${item.toLowerCase()}`;
-              return (
-                <Link href={path} key={item}>
-                  <span
-                    className={`relative uppercase tracking-wide text-xs cursor-pointer transition-all py-1 block ${
-                      activeMenu === item
-                        ? 'text-blue-300 dark:text-blue-700'
-                        : 'hover:text-blue-400 dark:hover:text-blue-600'
-                    } ${
-                      activeMenu === item ? 'after:w-full' : 'after:w-0'
-                    } after:transition-all after:duration-300 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[2px] after:bg-gradient-to-r from-blue-600 to-blue-400`}
-                    onClick={() => {
-                      setActiveMenu(item);
-                      setNavOpen(false);
-                    }}
-                  >
-                    {item}
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Mobile Nav Toggle */}
-          <button
-            className="md:hidden text-white dark:text-black text-xl ml-auto"
-            onClick={() => setNavOpen(!navOpen)}
-            aria-label="Toggle navigation"
-          >
-            {navOpen ? '✖' : '☰'}
-          </button>
-        </div>
-
-        {/* Mobile Menu */}
-        <div className={`md:hidden flex-col gap-4 mt-4 ${navOpen ? 'flex' : 'hidden'} items-start`}>
-          {menuItems.map((item) => {
-            const path = item === 'HOME' ? '/' : `/${item.toLowerCase()}`;
-            return (
-              <Link href={path} key={item}>
-                <span
-                  className={`relative uppercase tracking-wide text-xs cursor-pointer transition-all py-1 block ${
-                    activeMenu === item
-                      ? 'text-blue-300 dark:text-blue-700'
-                      : 'hover:text-blue-400 dark:hover:text-blue-600'
-                  } ${
-                    activeMenu === item ? 'after:w-full' : 'after:w-0'
-                  } after:transition-all after:duration-300 after:absolute after:bottom-0 after:left-1/2 after:-translate-x-1/2 after:h-[2px] after:bg-gradient-to-r from-blue-600 to-blue-400`}
-                  onClick={() => {
-                    setActiveMenu(item);
-                    setNavOpen(false);
-                  }}
-                >
-                  {item}
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-      </nav>
+      {/* Sticky Navbar */}
+      <Navbar />
 
       {/* Custom Animations */}
       <style jsx>{`
@@ -187,7 +131,6 @@ export default function Header() {
             transform: translateY(-20px) rotate(180deg);
           }
         }
-
         .animate-float {
           animation: float 6s ease-in-out infinite;
         }
