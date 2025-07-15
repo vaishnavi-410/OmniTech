@@ -1,45 +1,51 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { SparklesIcon } from '@heroicons/react/24/solid';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 export default function HomeSection() {
   const slidesRef = useRef(null);
   const progressRef = useRef(null);
+  const intervalRef = useRef(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const intervalRef = useRef(null);
 
-const slides = [
-  {
-    img: '/images/slider/slide1.jpg',
-    title: 'Precision Machines',
-    desc: 'High accuracy for advanced manufacturing with our state-of-the-art industrial equipment.',
-    btn: 'Learn More',
-    link: '/learn-more',
-  },
-  {
-    img: '/images/slider/slide2.jpg',
-    title: 'Automation Systems',
-    desc: 'Streamlining processes for maximum efficiency with cutting-edge robotic solutions.',
-    btn: 'Discover',
-    link: '/discover',
-  },
-  {
-    img: '/images/slider/slide3.jpg',
-    title: 'Smart Factories',
-    desc: 'Transforming production lines into intelligent Industry 4.0 systems with IoT integration.',
-    btn: 'Explore',
-    link: '/explore',
-  },
-  {
-    img: '/images/slider/slide4.jpg',
-    title: 'Eco-Friendly Solutions',
-    desc: 'Building sustainable technologies for a greener industrial future.',
-    btn: 'Get Started',
-    link: '/get-started',
-  },
-];
+  const slides = [
+    {
+      img: '/images/slider/slide1.jpg',
+      title: 'Precision Machines',
+      desc: 'High accuracy for advanced manufacturing with our state-of-the-art industrial equipment.',
+    },
+    {
+      img: '/images/slider/slide2.jpg',
+      title: 'Automation Systems',
+      desc: 'Streamlining processes for maximum efficiency with cutting-edge robotic solutions.',
+    },
+    {
+      img: '/images/slider/slide3.jpg',
+      title: 'Smart Factories',
+      desc: 'Transforming production lines into intelligent Industry 4.0 systems with IoT integration.',
+    },
+    {
+      img: '/images/slider/slide4.jpg',
+      title: 'Eco-Friendly Solutions',
+      desc: 'Building sustainable technologies for a greener industrial future.',
+    },
+  ];
 
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+    if (isPlaying) startProgressBar();
+  };
+
+  const goToNext = () => goToSlide((currentIndex + 1) % slides.length);
+  const goToPrev = () => goToSlide((currentIndex - 1 + slides.length) % slides.length);
+
+  const togglePlayPause = () => {
+    isPlaying ? stopAutoSlide() : startAutoSlide();
+  };
 
   const startProgressBar = () => {
     if (progressRef.current) {
@@ -54,7 +60,7 @@ const slides = [
 
   const startAutoSlide = () => {
     clearInterval(intervalRef.current);
-    intervalRef.current = setInterval(() => goToSlide((currentIndex + 1) % slides.length), 5000);
+    intervalRef.current = setInterval(goToNext, 5000);
     setIsPlaying(true);
     startProgressBar();
   };
@@ -68,25 +74,15 @@ const slides = [
     }
   };
 
-  const togglePlayPause = () => {
-    isPlaying ? stopAutoSlide() : startAutoSlide();
-  };
-
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-    if (isPlaying) startProgressBar();
-  };
-
-  const goToNext = () => goToSlide((currentIndex + 1) % slides.length);
-  const goToPrev = () => goToSlide((currentIndex - 1 + slides.length) % slides.length);
-
   useEffect(() => {
     startAutoSlide();
+
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowLeft') goToPrev();
       else if (e.key === 'ArrowRight') goToNext();
       else if (e.key === ' ') togglePlayPause();
     };
+
     document.addEventListener('keydown', handleKeyDown);
     return () => {
       clearInterval(intervalRef.current);
@@ -94,65 +90,71 @@ const slides = [
     };
   }, [currentIndex]);
 
+  useEffect(() => {
+    AOS.init({ duration: 1000, once: false, mirror: true });
+    const handleScroll = () => AOS.refresh();
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <div className="relative w-full h-screen max-h-[900px] min-h-[600px] overflow-hidden">
+    <div className="relative w-full h-screen max-h-[900px] min-h-[600px] overflow-hidden" data-aos="fade-up">
       {/* Arrows */}
       <button
-        className="absolute top-1/2 left-4 transform -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/10 text-white text-xl rounded-full z-20 flex items-center justify-center hover:bg-white/20 transition"
         onClick={goToPrev}
+        className="absolute z-20 top-1/2 left-4 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/10 text-white text-xl rounded-full flex items-center justify-center hover:bg-white/20 transition"
       >
         &#8249;
       </button>
-
       <button
-        className="absolute top-1/2 right-4 transform -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/10 text-white text-xl rounded-full z-20 flex items-center justify-center hover:bg-white/20 transition"
         onClick={goToNext}
+        className="absolute z-20 top-1/2 right-4 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 bg-white/10 text-white text-xl rounded-full flex items-center justify-center hover:bg-white/20 transition"
       >
         &#8250;
       </button>
 
       {/* Slides */}
       <div
+        ref={slidesRef}
         className="flex h-full transition-transform duration-700 ease-in-out"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-        ref={slidesRef}
       >
-        {slides.map((slide, i) => (
-          <div key={i} className="relative flex-shrink-0 w-full h-full overflow-hidden">
+        {slides.map((slide, index) => (
+          <div key={index} className="relative w-full flex-shrink-0 h-full group">
             <img
               src={slide.img}
               alt={slide.title}
-              className="w-full h-full object-cover scale-100 hover:scale-105 transition-transform duration-700 ease-in-out"
+              className="w-full h-full object-cover object-center transition-transform duration-700 ease-in-out group-hover:scale-105"
             />
-
-            <div className="absolute inset-0 z-10 bg-[#0a1f44aa] backdrop-blur-md clip-diagonal pointer-events-none" />
-
-            <div
-              className={`absolute right-4 left-4 sm:right-8 sm:left-auto bottom-10 sm:bottom-14 max-w-full sm:max-w-md md:max-w-lg p-6 sm:p-8 bg-[#0a1f44dd] text-white border-l-[5px] border-cyan-400 rounded-2xl z-20 backdrop-blur-xl shadow-lg transition-all duration-700 ease-in-out ${
-                i === currentIndex ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: index === currentIndex ? 1 : 0, y: index === currentIndex ? 0 : 30 }}
+              transition={{ duration: 0.6 }}
+              className={`absolute bottom-10 sm:bottom-14 left-4 sm:left-auto sm:right-8 z-20 bg-gradient-to-br from-[#0a1f44ee] to-[#0d2c5add] text-white border-l-4 border-cyan-400 p-6 sm:p-8 rounded-2xl shadow-lg max-w-full sm:max-w-md md:max-w-lg backdrop-blur-xl transform transition duration-500 ease-in-out group-hover:scale-105 hover:shadow-2xl ${
+                index === currentIndex ? '' : 'pointer-events-none'
               }`}
             >
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">{slide.title}</h1>
-              <p className="text-sm sm:text-base md:text-lg mb-6">{slide.desc}</p>
-              <Link href={slide.link}>
-                <button className="px-5 py-2 sm:px-6 sm:py-2 text-sm sm:text-base text-white font-medium rounded-full bg-gradient-to-r from-cyan-600 to-cyan-400 hover:shadow-xl hover:-translate-y-1 transition">
-                  {slide.btn}
-                </button>
-              </Link>
-            </div>
+              <div className="flex items-center gap-2 mb-3">
+                <SparklesIcon className="h-6 w-6 text-cyan-400" />
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold">{slide.title}</h1>
+              </div>
+              <p className="text-sm sm:text-base md:text-lg">{slide.desc}</p>
+            </motion.div>
           </div>
         ))}
       </div>
 
       {/* Indicators */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
-        {slides.map((_, i) => (
+        {slides.map((_, index) => (
           <span
-            key={i}
-            className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300 ${
-              i === currentIndex ? 'w-7 bg-cyan-400 rounded-md' : 'bg-white/40'
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`cursor-pointer transition-all duration-300 ${
+              index === currentIndex
+                ? 'w-7 h-3 rounded-md bg-cyan-400'
+                : 'w-3 h-3 rounded-full bg-white/40'
             }`}
-            onClick={() => goToSlide(i)}
           />
         ))}
       </div>
@@ -165,18 +167,6 @@ const slides = [
           style={{ width: '0%' }}
         ></div>
       </div>
-
-      <style jsx>{`
-        .clip-diagonal {
-          clip-path: polygon(100% 0, 100% 100%, 50% 100%);
-        }
-
-        @media (max-width: 768px) {
-          .clip-diagonal {
-            clip-path: none;
-          }
-        }
-      `}</style>
     </div>
   );
 }

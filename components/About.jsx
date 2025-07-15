@@ -6,14 +6,16 @@ import Link from 'next/link';
 
 const About = () => {
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      AOS.init({ duration: 1200 });
-    }
+    AOS.init({ duration: 1200, once: false, mirror: true });
+    const handleScroll = () => AOS.refresh();
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
     <section
-      className="relative flex flex-col lg:flex-row items-center justify-between max-w-[1400px] mx-auto my-20 h-auto lg:h-[520px] bg-transparent rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden"
+      className="relative z-10 flex flex-col lg:flex-row items-center justify-between max-w-[1400px] mx-auto my-20 h-auto lg:h-[520px] bg-white/10 dark:bg-[#0a1f44]/20 backdrop-blur-md rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] overflow-hidden"
       data-aos="fade-up"
       id="about"
     >

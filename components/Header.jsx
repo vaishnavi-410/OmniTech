@@ -1,6 +1,9 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import DesktopMenu from './DesktopMenu';
 import MobMenu from './MobMenu';
 import { Menus } from '@/utils/menus';
@@ -9,20 +12,12 @@ export function Navbar() {
   return (
     <nav className="bg-gradient-to-r from-[#000080] via-[#000099] to-[#0000CD] text-gray-100 h-16 sticky top-0 z-50 shadow">
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-full">
-        {/* Desktop Menu aligned to the left */}
         <ul className="relative hidden lg:flex items-center gap-6">
           {Menus.map((menu, i) => (
             <DesktopMenu key={i} menu={menu} />
           ))}
         </ul>
-
-        {/* Right: Sign In button and Mobile Menu */}
         <div className="flex items-center gap-4">
-          <button className="bg-[#CBD5E1] text-[#000080] px-3 py-1.5 rounded-xl hover:bg-white transition text-sm">
-            Sign In
-          </button>
-
-          {/* Mobile Menu */}
           <div className="lg:hidden">
             <MobMenu Menus={Menus} />
           </div>
@@ -33,10 +28,26 @@ export function Navbar() {
 }
 
 export default function Header() {
-  const [activeMenu, setActiveMenu] = useState('HOME');
   const [particles, setParticles] = useState([]);
-  const [navOpen, setNavOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    // Initialize AOS
+    AOS.init({
+      duration: 1000,
+      once: false,
+      mirror: true,
+    });
+
+    // Re-initialize on scroll
+    const handleScroll = () => AOS.refresh();
+    window.addEventListener('scroll', handleScroll);
+
+    // Re-initialize on pathname (route change)
+    AOS.refresh();
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [pathname]);
 
   useEffect(() => {
     const particleArray = Array.from({ length: 12 }).map((_, i) => ({
@@ -72,11 +83,11 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Top Info Bar + Logo Section */}
-      <div className="relative z-[40] bg-transparent backdrop-blur-md">
+      {/* Header Content with AOS */}
+      <div className="relative z-[40] bg-transparent backdrop-blur-md" data-aos="fade-down">
         <div className="bg-gradient-to-r from-blue-800/90 to-gray-900/90 px-4 py-2 flex flex-col md:flex-row md:justify-between items-center text-white text-sm font-medium border-b border-blue-500/20 gap-2 text-center">
           <div className="flex items-center gap-2 before:content-['📞'] before:animate-pulse">
-            Hotline (+91) 44-2688 0737
+            Helpline (+91) 44-2688 0737
           </div>
           <div className="text-xs opacity-90">
             🌟 Premium Metallurgy Solutions | Trusted Since 1995
@@ -84,7 +95,10 @@ export default function Header() {
         </div>
 
         <div className="flex flex-col md:flex-row justify-between items-center px-4 md:px-8 py-6 relative gap-6">
-          <div className="flex items-center gap-4 cursor-pointer transition-transform hover:scale-105">
+          <div
+            className="flex items-center gap-4 cursor-pointer transition-transform hover:scale-105"
+            data-aos="zoom-in"
+          >
             <img
               src="https://images-platform.99static.com/mx5CtlcMEwKY37aZGeZZFLaJn5w=/500x500/top/smart/99designs-contests-attachments/55/55214/attachment_55214390"
               alt="Omnitech Logo"
@@ -107,7 +121,9 @@ export default function Header() {
                 placeholder="Search products, services..."
                 className="py-2 px-4 w-[200px] md:w-[250px] outline-none text-sm text-black dark:text-white placeholder-slate-400 bg-transparent"
               />
-              <button className="py-2 px-4 bg-gradient-to-br from-blue-700 to-gray-900 text-white text-base">🔍</button>
+              <button className="py-2 px-4 bg-gradient-to-br from-blue-700 to-gray-900 text-white text-base">
+                🔍
+              </button>
             </div>
             <img src="https://flagcdn.com/w40/in.png" alt="India Flag" className="w-7 h-5 rounded shadow" />
           </div>
