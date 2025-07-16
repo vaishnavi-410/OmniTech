@@ -32,18 +32,15 @@ export default function Header() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Initialize AOS
     AOS.init({
       duration: 1000,
       once: false,
       mirror: true,
     });
 
-    // Re-initialize on scroll
     const handleScroll = () => AOS.refresh();
     window.addEventListener('scroll', handleScroll);
 
-    // Re-initialize on pathname (route change)
     AOS.refresh();
 
     return () => window.removeEventListener('scroll', handleScroll);
@@ -126,10 +123,6 @@ export default function Header() {
               </button>
             </div>
             <img src="https://flagcdn.com/w40/in.png" alt="India Flag" className="w-7 h-5 rounded shadow" />
-          </div>
-
-          <div className="absolute -bottom-6 left-6 bg-gradient-to-r from-blue-700 to-gray-900 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-lg whitespace-nowrap before:content-['✨'] before:mr-2 max-w-full overflow-x-auto">
-            Empowering Innovation | Excellence in Metallurgy
           </div>
         </div>
       </div>
