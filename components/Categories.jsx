@@ -48,81 +48,49 @@ export default function Categories() {
   ];
 
   return (
-    <>
-      <section
-        id="categories"
-        className="relative w-full px-4 sm:px-6 py-20 sm:py-16 overflow-hidden"
-      >
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <img
-            src="https://images.unsplash.com/photo-1496247749665-49cf5b1022e9?fm=jpg&q=80&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aW5kdXN0cmlhbHxlbnwwfHwwfHx8MA%3D%3D"
-            alt="Metal BG"
-            className="w-full h-full object-cover opacity-80"
-          />
-        </div>
-
-        {/* Floating Background Bubbles */}
-        {[...Array(10)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full bg-white/20 backdrop-blur-sm shadow-lg animate-pulse"
-            style={{
-              width: [100, 120, 90, 110, 75, 95, 85, 80, 130, 60][i],
-              height: [100, 120, 90, 110, 75, 95, 85, 80, 130, 60][i],
-              left: [
-                '10%', '70%', '50%', '80%', '25%',
-                '15%', '60%', '35%', '85%', '40%'
-              ][i],
-              top: [
-                '20%', '40%', '70%', '15%', '60%',
-                '80%', '25%', '10%', '50%', '85%'
-              ][i],
-            }}
-          />
-        ))}
-
-        {/* Title */}
+    <section
+      id="categories"
+      className="relative w-full px-4 sm:px-6 py-8 overflow-hidden"
+    >
+      {/* Title */}
+      <div className="relative z-10 backdrop-blur-lg bg-blue-900/70 w-full py-6 rounded-xl shadow-md animate__animated animate__fadeInDown">
         <h2
-          className="relative z-10 text-center text-4xl sm:text-3xl font-extrabold uppercase tracking-wider bg-gradient-to-r from-sky-300 to-white bg-clip-text text-transparent"
+          className="text-center text-4xl sm:text-3xl font-extrabold uppercase tracking-wider text-white"
           data-aos="zoom-in"
         >
           Product Categories
         </h2>
         <p
-          className="relative z-10 mb-12 mt-2 text-center text-base sm:text-sm font-medium text-slate-300"
+          className="mt-2 text-center text-base sm:text-sm font-medium text-blue-100"
           data-aos="fade-up"
         >
           Explore our specialized range of metallurgy solutions
         </p>
+      </div>
 
-        {/* Cards Grid */}
-        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {cards.map((item, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-center bg-white rounded-xl px-6 py-6 border border-sky-300 hover:scale-[1.04] hover:-translate-y-1 hover:shadow-2xl transition-transform duration-500 cursor-pointer mx-auto w-full max-w-xs"
-              data-aos="fade-up"
-              data-aos-delay={index * 100}
-              onClick={() => showAlert(item.name)}
-            >
-              <div className="flex h-[180px] w-full items-center justify-center rounded-lg bg-blue-100/60 shadow-inner border border-blue-200 overflow-hidden">
-                <img
-                  src={item.img}
-                  alt={item.name}
-                  className="h-full w-full object-cover rounded-md"
-                />
-              </div>
-              <p className="text-center text-lg font-bold text-blue-900 tracking-wide mt-3">
-                {item.name}
-              </p>
+      {/* Cards Grid */}
+      <div className="relative z-10 mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate__animated animate__fadeInUp">
+        {cards.map((item, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center bg-white rounded-xl px-6 py-6 border border-sky-300 hover:scale-[1.04] hover:-translate-y-1 hover:shadow-2xl transition-transform duration-500 cursor-pointer mx-auto w-full max-w-xs"
+            data-aos="zoom-in-up"
+            data-aos-delay={index * 100}
+            onClick={() => showAlert(item.name)}
+          >
+            <div className="flex h-[180px] w-full items-center justify-center rounded-lg bg-blue-100/60 shadow-inner border border-blue-200 overflow-hidden shadow-[0_4px_20px_rgba(0,0,128,0.5)]">
+              <img
+                src={item.img}
+                alt={item.name}
+                className="h-full w-full object-cover rounded-md shadow-[0_4px_20px_rgba(0,0,128,0.5)]"
+              />
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Little empty layout below */}
-      <div className="w-full h-16 bg-transparent"></div>
-    </>
+            <p className="text-center text-lg font-bold text-blue-900 tracking-wide mt-3">
+              {item.name}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
