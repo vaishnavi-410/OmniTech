@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/contact/src/page.js", "app/contact/src/app/contact/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/contact/src/page.js", "app/contact/src/app/contact/page.jsx", "app/contact/page.jsx", "app/contact/src/page.jsx", "app/contact/src/layout.jsx", "app/contact/src/components/SectionTitle.jsx", "app/contact/src/components/ContactMap.jsx", "app/contact/src/components/ContactInfo.jsx", "app/contact/src/components/ContactForm.jsx", "app/contact/src/components/BusinessHours.jsx"],
   "exclude": ["node_modules"]
 }
