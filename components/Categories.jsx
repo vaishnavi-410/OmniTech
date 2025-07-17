@@ -50,14 +50,14 @@ export default function Categories() {
   return (
     <section
       id="categories"
-      className="relative w-full px-4 sm:px-6 py-8 overflow-hidden"
+      className="relative w-full px-4 sm:px-6 py-12 overflow-hidden bg-transparent"
     >
       {/* Title */}
-      <div className="relative z-10 backdrop-blur-lg bg-blue-900/70 w-full py-6 rounded-xl shadow-md animate__animated animate__fadeInDown">
-        <h2
-          className="text-center text-4xl sm:text-3xl font-extrabold uppercase tracking-wider text-white"
-          data-aos="zoom-in"
-        >
+      <div
+        className="relative z-10 backdrop-blur-xl bg-blue-900/70 w-full py-6 rounded-xl shadow-xl animate__animated animate__fadeInDown"
+        data-aos="zoom-in"
+      >
+        <h2 className="text-center text-4xl sm:text-3xl font-extrabold uppercase tracking-wider text-white">
           Product Categories
         </h2>
         <p
@@ -69,23 +69,27 @@ export default function Categories() {
       </div>
 
       {/* Cards Grid */}
-      <div className="relative z-10 mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 animate__animated animate__fadeInUp">
+      <div
+        className="relative z-10 mt-10 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8"
+        data-aos="fade-up"
+      >
         {cards.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col items-center bg-white rounded-xl px-6 py-6 border border-sky-300 hover:scale-[1.04] hover:-translate-y-1 hover:shadow-2xl transition-transform duration-500 cursor-pointer mx-auto w-full max-w-xs"
+            className="group flex flex-col items-center bg-white/90 rounded-xl px-6 py-6 border border-blue-200 hover:scale-[1.05] hover:-translate-y-1 transition-transform duration-500 ease-in-out shadow-lg hover:shadow-blue-500/40 cursor-pointer mx-auto w-full max-w-xs backdrop-blur-md"
             data-aos="zoom-in-up"
             data-aos-delay={index * 100}
             onClick={() => showAlert(item.name)}
           >
-            <div className="flex h-[180px] w-full items-center justify-center rounded-lg bg-blue-100/60 shadow-inner border border-blue-200 overflow-hidden shadow-[0_4px_20px_rgba(0,0,128,0.5)]">
+            <div className="relative h-[180px] w-full rounded-lg overflow-hidden shadow-[0_4px_20px_rgba(0,0,128,0.3)] border border-blue-200">
               <img
                 src={item.img}
                 alt={item.name}
-                className="h-full w-full object-cover rounded-md shadow-[0_4px_20px_rgba(0,0,128,0.5)]"
+                className="h-full w-full object-cover transform group-hover:scale-105 transition duration-500 ease-in-out"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             </div>
-            <p className="text-center text-lg font-bold text-blue-900 tracking-wide mt-3">
+            <p className="text-center text-lg font-bold text-blue-900 tracking-wide mt-4 group-hover:opacity-100 opacity-90 transition-opacity duration-300">
               {item.name}
             </p>
           </div>

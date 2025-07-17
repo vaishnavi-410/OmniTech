@@ -11,55 +11,58 @@ export default function Products() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-fixed bg-cover bg-center bg-no-repeat bg-[url('https://www.pixelstalk.net/wp-content/uploads/images1/Free-Industrial-Images.jpg')] font-sans text-gray-800 dark:text-white">
-      {/* Spacer */}
-      <div className="h-[60px]"></div>
+    <div className="relative min-h-screen font-sans text-gray-800 dark:text-white overflow-hidden">
+      {/* Background Image (Fixed, Slight Blur) */}
+      <div className="absolute inset-0 bg-[url('https://media.gettyimages.com/id/2150966588/vector/gears-abstract-technical-drawing-blueprint-with-gear-cogs-mechanical-engineering-machinery.jpg?s=2048x2048&w=gi&k=20&c=JNRCHfRc0VmnyEfD-yskrw1EF7hLCX7sR7Jg32E0bpo=')] bg-cover bg-center bg-fixed filter blur-sm z-0" />
 
-      {/* Header Box */}
-      <div
-        className="w-full bg-white/60 dark:bg-[#001f4d]/70 backdrop-blur-lg border border-white/40 dark:border-blue-500/30 shadow-2xl px-4 sm:px-6 lg:px-10 py-8 text-center"
-        data-aos="fade-down"
-        data-aos-duration="1200"
-      >
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase text-[#001f4d] dark:text-blue-100 tracking-widest drop-shadow-md">
-          OMNITECH MACHINES
-        </h1>
-        <p className="text-base sm:text-lg mt-3 text-[#263f5f] dark:text-blue-300 font-medium">
-          Explore our specialized range of metallurgical machines
-        </p>
-      </div>
+      {/* Foreground Content */}
+      <div className="relative z-10">
+        {/* Header Box */}
+        <div
+          className="w-full bg-[#001f4d] border-b border-blue-900 shadow-2xl px-4 sm:px-6 lg:px-10 py-8 text-center"
+          data-aos="fade-down"
+          data-aos-duration="1200"
+        >
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold uppercase text-white tracking-widest drop-shadow-md">
+            OMNITECH MACHINES
+          </h1>
+          <p className="text-base sm:text-lg mt-3 text-blue-200 font-medium">
+            Explore our specialized range of metallurgical machines
+          </p>
+        </div>
 
-      {/* Product Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 px-4 sm:px-6 lg:px-10 py-10 max-w-7xl mx-auto">
-        {products.map((product, index) => (
-          <div
-            key={index}
-            className="card bg-white dark:bg-slate-900 bg-opacity-90 w-full rounded-xl shadow-lg hover:shadow-2xl dark:shadow-blue-800 transition-transform duration-300 transform hover:scale-[1.03] flex flex-col overflow-hidden"
-            data-aos="fade-up"
-            data-aos-delay={index * 100}
-          >
-            <img
-              src={product.image}
-              alt={product.title}
-              className="w-full h-[180px] object-cover transition-transform duration-500 hover:scale-105"
-            />
-            <div className="p-4 flex flex-col justify-between flex-grow">
-              <div>
-                <h2 className="text-lg sm:text-xl font-semibold text-[#002147] dark:text-blue-200 mb-2">
-                  {product.title}
-                </h2>
-                <p className="text-sm sm:text-base leading-relaxed text-[#2b2b2b] dark:text-gray-300">
-                  {product.description}
-                </p>
+        {/* Product Grid */}
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-16">
+          {products.map((product, index) => (
+            <div
+              key={index}
+              className="card bg-white dark:bg-slate-900 bg-opacity-95 w-full rounded-xl shadow-lg hover:shadow-2xl dark:shadow-blue-800 transition-transform duration-300 transform hover:scale-[1.03] flex flex-col overflow-hidden"
+              data-aos="fade-up"
+              data-aos-delay={index * 100}
+            >
+              <img
+                src={product.image}
+                alt={product.title}
+                className="w-full h-[180px] object-cover transition-transform duration-500 hover:scale-105"
+              />
+              <div className="p-4 flex flex-col justify-between flex-grow">
+                <div>
+                  <h2 className="text-lg sm:text-xl font-semibold text-[#002147] dark:text-blue-200 mb-2">
+                    {product.title}
+                  </h2>
+                  <p className="text-sm sm:text-base leading-relaxed text-[#2b2b2b] dark:text-gray-300">
+                    {product.description}
+                  </p>
+                </div>
+                <Link href="/products" className="mt-4 block">
+                  <button className="w-full px-4 py-2 bg-[#003d73] dark:bg-blue-700 text-white rounded hover:bg-[#005099] dark:hover:bg-blue-600 font-semibold transition-all">
+                    To the product range
+                  </button>
+                </Link>
               </div>
-              <Link href="/products" className="mt-4 block">
-                <button className="w-full px-4 py-2 bg-[#003d73] dark:bg-blue-700 text-white rounded hover:bg-[#005099] dark:hover:bg-blue-600 font-semibold transition-all">
-                  To the product range
-                </button>
-              </Link>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -24,42 +24,71 @@ export default function TrustedBrands() {
   }, []);
 
   return (
-    <div
-      className="font-sans text-gray-800 bg-fixed bg-cover bg-center"
-      style={{
-        backgroundImage:
-          "url('https://images.unsplash.com/photo-1697698532634-ea59b636ccea?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
-      }}
-    >
-      <section className="bg-white/60 py-16 px-4 text-center" data-aos="fade-up">
-        <h2 className="text-2xl md:text-3xl font-semibold uppercase text-[#182c6c] mb-4">
-          Global brands that place their trust in our equipment and services
-        </h2>
-        <p className="max-w-4xl mx-auto mb-10 text-base leading-relaxed text-gray-700">
-          We are proud of the strong partnerships that we have built with
-          leading industrial brands, prestigious universities, and respected
-          research establishments. They demand a supplier with global reach,
-          world-class equipment, and in-depth knowledge that they can rely on.
-        </p>
+    <div className="relative font-sans text-gray-800">
+      {/* Background Image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center z-0"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1697698532634-ea59b636ccea?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+        }}
+      />
 
-        <div className="overflow-hidden relative w-full">
-          <div className="marquee-track flex w-max">
-            {[...brandLogos, ...brandLogos].map((logo, index) => (
-              <div key={index} className="flex-shrink-0 px-4 sm:px-6 md:px-10 py-2">
-                <img
-                  src={logo}
-                  alt={`Brand-${index}`}
-                  className="max-h-16 sm:max-h-20 md:max-h-24 max-w-[180px] object-contain grayscale hover:grayscale-0 hover:scale-105 transition-all duration-300"
-                />
-              </div>
-            ))}
+      {/* Overlay Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#00000088] to-[#000000aa] z-0" />
+
+      <section className="relative z-10 py-20 px-4 text-center">
+        <div
+          className="bg-white/70 backdrop-blur-md rounded-2xl max-w-6xl mx-auto shadow-xl p-8 md:p-12 transition-all duration-300"
+          data-aos="fade-up"
+        >
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold uppercase mb-6 leading-tight text-[#003366] drop-shadow-md">
+            Global Brands Trust Our Expertise
+          </h2>
+          <p className="max-w-4xl mx-auto mb-10 text-lg md:text-xl text-gray-800 leading-relaxed drop-shadow-sm">
+            From industry leaders to top universities and research institutions — our world-class equipment,
+            unmatched service, and global presence make us a trusted partner across the globe.
+          </p>
+
+          {/* Logo carousel */}
+          <div className="overflow-hidden relative w-full">
+            <div className="marquee-track flex w-max gap-6">
+              {[...brandLogos, ...brandLogos].map((logo, index) => (
+                <div
+                  key={index}
+                  className="flex-shrink-0 px-2 sm:px-4 md:px-6 py-2"
+                >
+                  <div className="h-[100px] w-[180px] sm:h-[120px] sm:w-[200px] md:h-[130px] md:w-[220px] bg-white rounded-lg shadow-md flex items-center justify-center p-3 transition-transform transform hover:scale-105">
+                    <img
+                      src={logo}
+                      alt={`Brand-${index}`}
+                      className="h-full w-full object-contain transition-transform duration-300 ease-in-out"
+                      onError={(e) => {
+                        e.currentTarget.onerror = null;
+                        e.currentTarget.src =
+                          "data:image/svg+xml;charset=UTF-8," +
+                          encodeURIComponent(`
+                            <svg xmlns='http://www.w3.org/2000/svg' width='200' height='130'>
+                              <rect fill='#f8f8f8' width='200' height='130'/>
+                              <text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='14' fill='#999'>
+                                No Image
+                              </text>
+                            </svg>
+                          `);
+                      }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Scrolling Styles */}
       <style jsx>{`
         .marquee-track {
-          animation: scroll-left 25s linear infinite;
+          animation: scroll-left 45s linear infinite;
         }
 
         @keyframes scroll-left {
@@ -73,8 +102,8 @@ export default function TrustedBrands() {
 
         @media (max-width: 640px) {
           .marquee-track img {
-            max-height: 64px;
-            max-width: 120px;
+            max-height: 80px;
+            max-width: 140px;
           }
         }
       `}</style>
