@@ -4,7 +4,7 @@ import { useState } from "react";
 export default function FAQPage() {
   const [feedbacks, setFeedbacks] = useState({});
   const [footerFeedback, setFooterFeedback] = useState(null);
-  const [openFAQ, setOpenFAQ] = useState(2); // Initially open FAQ at index 2
+  const [openFAQ, setOpenFAQ] = useState(2);
 
   const faqs = [
     {
@@ -37,41 +37,144 @@ export default function FAQPage() {
     setOpenFAQ(index);
   };
 
-  const handleMouseLeave = () => {
-    // Keep the FAQ open when mouse leaves to allow interaction with buttons
-    // setOpenFAQ(null);
-  };
-
   return (
     <>
       <style>{`
-        body {
+        .faq-wrapper {
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
           background: #ffffff;
           color: #333333;
           padding: 40px 20px;
-          transition: all 0.5s ease;
-        }
-
-        * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
         }
 
         .container {
           max-width: 900px;
           margin: auto;
-          background: #ffffff;
-          border-radius: 12px;
+          background: linear-gradient(135deg, #ffffff 0%, #f8fbff 50%, #e8f5ff 100%);
+          border-radius: 20px;
           padding: 30px;
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 20px 60px rgba(83, 172, 197, 0.2);
+          border: 2px solid transparent;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .container::before {
+          content: '';
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          right: -2px;
+          bottom: -2px;
+          background: linear-gradient(45deg, #53acc5, #a0f7c7, #00d4ff, #53acc5);
+          border-radius: 22px;
+          z-index: -1;
+          opacity: 0.3;
+          animation: containerBorder 3s linear infinite;
+        }
+
+        .container::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: radial-gradient(circle at 20% 30%, rgba(83, 172, 197, 0.1) 0%, transparent 50%),
+                      radial-gradient(circle at 80% 20%, rgba(160, 247, 199, 0.1) 0%, transparent 50%),
+                      radial-gradient(circle at 40% 80%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                      radial-gradient(circle at 90% 70%, rgba(83, 172, 197, 0.08) 0%, transparent 50%),
+                      radial-gradient(circle at 10% 90%, rgba(160, 247, 199, 0.08) 0%, transparent 50%);
+          border-radius: 20px;
+          z-index: -1;
+          animation: bubbleFloat 8s ease-in-out infinite;
+        }
+
+        @keyframes containerBorder {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+
+        @keyframes bubbleFloat {
+          0%, 100% { 
+            transform: translateY(0px) scale(1);
+            opacity: 0.6;
+          }
+          50% { 
+            transform: translateY(-10px) scale(1.05);
+            opacity: 0.8;
+          }
+        }
+
+        .bubble {
+          position: absolute;
+          border-radius: 50%;
+          background: linear-gradient(135deg, rgba(83, 172, 197, 0.1), rgba(160, 247, 199, 0.1));
+          animation: floatBubble 6s ease-in-out infinite;
+          z-index: 0;
+        }
+
+        .bubble:nth-child(1) {
+          width: 60px;
+          height: 60px;
+          top: 10%;
+          left: 15%;
+          animation-delay: 0s;
+        }
+
+        .bubble:nth-child(2) {
+          width: 40px;
+          height: 40px;
+          top: 70%;
+          right: 20%;
+          animation-delay: 2s;
+        }
+
+        .bubble:nth-child(3) {
+          width: 80px;
+          height: 80px;
+          bottom: 15%;
+          left: 10%;
+          animation-delay: 4s;
+        }
+
+        .bubble:nth-child(4) {
+          width: 30px;
+          height: 30px;
+          top: 50%;
+          right: 10%;
+          animation-delay: 1s;
+        }
+
+        .bubble:nth-child(5) {
+          width: 50px;
+          height: 50px;
+          top: 25%;
+          right: 40%;
+          animation-delay: 3s;
+        }
+
+        @keyframes floatBubble {
+          0%, 100% { 
+            transform: translateY(0px) translateX(0px) scale(1);
+            opacity: 0.3;
+          }
+          33% { 
+            transform: translateY(-15px) translateX(10px) scale(1.1);
+            opacity: 0.5;
+          }
+          66% { 
+            transform: translateY(-5px) translateX(-8px) scale(0.9);
+            opacity: 0.4;
+          }
         }
 
         header {
           text-align: center;
           margin-bottom: 30px;
-          animation: fadeInDown 0.8s ease-out;
+          position: relative;
+          z-index: 1;
         }
 
         header h1 {
@@ -89,38 +192,23 @@ export default function FAQPage() {
           font-size: 1.2rem;
           margin-top: 10px;
           color: #666;
-          animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .faq {
+          position: relative;
+          z-index: 1;
         }
 
         .faq-item {
-          background: linear-gradient(135deg, #f8fbff 0%, #ffffff 100%);
+          background: #ffffff;
           border-radius: 15px;
           margin-bottom: 15px;
           padding: 20px;
           box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: all 0.4s ease;
           position: relative;
-          animation: slideInStagger 0.6s ease forwards;
           cursor: pointer;
           border: 1px solid rgba(83, 172, 197, 0.1);
-          overflow: hidden;
-          opacity: 0;
-          transform: translateY(20px);
-        }
-
-        .faq-item::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-          transition: left 0.6s ease;
-        }
-
-        .faq-item:hover::before {
-          left: 100%;
         }
 
         .faq-item:hover {
@@ -136,9 +224,7 @@ export default function FAQPage() {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          user-select: none;
-          position: relative;
+          transition: all 0.3s ease;
         }
 
         .question:hover {
@@ -149,7 +235,6 @@ export default function FAQPage() {
 
         .expand-icon {
           font-size: 1.4rem;
-          transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
           background: linear-gradient(135deg, #53acc5, #a0f7c7);
           color: white;
           width: 28px;
@@ -158,12 +243,11 @@ export default function FAQPage() {
           display: flex;
           align-items: center;
           justify-content: center;
-          box-shadow: 0 2px 10px rgba(83, 172, 197, 0.3);
+          transition: transform 0.4s ease;
         }
 
         .expand-icon.open {
           transform: rotate(45deg) scale(1.1);
-          box-shadow: 0 4px 20px rgba(83, 172, 197, 0.5);
         }
 
         .answer {
@@ -172,16 +256,13 @@ export default function FAQPage() {
           line-height: 1.6;
           max-height: 0;
           overflow: hidden;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           opacity: 0;
-          transform: translateY(-10px);
+          transition: all 0.4s ease;
         }
 
         .answer.open {
           max-height: 250px;
           opacity: 1;
-          transform: translateY(0);
-          animation: slideInContent 0.5s ease-out;
         }
 
         .feedback {
@@ -203,66 +284,30 @@ export default function FAQPage() {
           font-weight: 600;
           font-size: 0.95rem;
           margin-right: 10px;
-          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-          position: relative;
-          overflow: hidden;
-          transform: translateY(0);
-        }
-
-        .feedback button::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-          transition: left 0.5s ease;
-        }
-
-        .feedback button:hover::before {
-          left: 100%;
         }
 
         .feedback .yes {
           background: linear-gradient(135deg, #2ecc71, #2cff84);
-          box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
         }
 
         .feedback .no {
           background: linear-gradient(135deg, #ff4c38, #fa3f2a);
-          box-shadow: 0 4px 15px rgba(255, 76, 56, 0.3);
         }
 
         .feedback button:hover {
-          transform: translateY(-2px) scale(1.05);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .feedback button:active {
-          transform: translateY(0) scale(0.98);
-          transition: all 0.1s ease;
+          transform: scale(1.05);
         }
 
         .thank-you {
           color: #00b894;
           font-size: 0.95rem;
-          margin-top: 0.5rem;
         }
 
         footer {
           text-align: center;
           margin-top: 40px;
           font-size: 0.9rem;
-          color: #555;
-          animation: fadeInUp 1s ease-out 0.8s both;
-        }
-
-        footer p {
-          font-size: 1rem;
-          margin-bottom: 12px;
-          font-weight: 600;
-          animation: pulse 2s infinite;
+          color: white;
         }
 
         footer button {
@@ -273,30 +318,6 @@ export default function FAQPage() {
           font-size: 1rem;
           margin: 5px;
           color: #fff;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-          background-size: 200% auto;
-          background-position: left center;
-          box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
-          position: relative;
-          overflow: hidden;
-        }
-
-        footer button::after {
-          content: '';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 0;
-          height: 0;
-          background: rgba(255, 255, 255, 0.3);
-          border-radius: 50%;
-          transition: all 0.4s ease;
-          transform: translate(-50%, -50%);
-        }
-
-        footer button:hover::after {
-          width: 100%;
-          height: 100%;
         }
 
         footer .yes {
@@ -308,78 +329,69 @@ export default function FAQPage() {
         }
 
         footer button:hover {
-          background-position: right center;
-          transform: translateY(-3px) scale(1.05);
-          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
-        }
-
-        footer button:active {
-          transform: translateY(-1px) scale(1.02);
-          transition: all 0.1s ease;
+          transform: scale(1.05);
         }
 
         a {
-          color: #18cdff;
+          color: white;
           text-decoration: none;
           transition: all 0.3s ease;
-          position: relative;
-        }
-
-        a::after {
-          content: '';
-          position: absolute;
-          bottom: -2px;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background: linear-gradient(90deg, #18cdff, #a0f7c7);
-          transition: width 0.3s ease;
-        }
-
-        a:hover::after {
-          width: 100%;
         }
 
         a:hover {
-          color: #0badda;
-          text-shadow: 0 0 8px rgba(24, 205, 255, 0.3);
+          color: #f0f0f0;
         }
+
+        .learn-link {
+          color: #00c9ff;
+          text-decoration: underline;
+        }
+
+        .learn-link:hover {
+          color: #36d1dc;
+        }
+
+        /* =================================================================
+           PRODUCT DROPDOWN FONT FORCE-BLACK
+           -----------------------------------------------------------------
+        ===================================================================*/
+        .product-dropdown,
+        .product-dropdown *,
+        .dropdown,
+        .dropdown * ,
+        .dropdown-menu,
+        .dropdown-menu * ,
+        .product-menu,
+        .product-menu * ,
+        nav [class*="dropdown"],
+        nav [class*="dropdown"] * ,
+        nav [class*="product"],
+        nav [class*="product"] * ,
+        nav [class*="menu"],
+        nav [class*="menu"] * ,
+        nav a[href^="/products/"] {
+          color: #000 !important;
+        }
+
+        
+        .product-dropdown .item-sub,
+        .dropdown-menu .item-sub,
+        nav [class*="dropdown"] .item-sub,
+        nav [class*="product"] .item-sub,
+        nav small,
+        nav p {
+          color: #555 !important;
+        }
+        
+        nav [class*="dropdown"] .item-title:hover,
+        nav [class*="product"] .item-title:hover {
+          color: #1f3dbd !important;
+        }
+        /* =================================================================*/
 
         @keyframes subtleGlow {
           from { text-shadow: 0 0 2px #00c9ff33; }
           to   { text-shadow: 0 0 6px #a0f7c7aa; }
-        }
-
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideIn {
-          from { opacity: 0; transform: translateX(-30px); }
-          to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes fadeInDown {
-          from { 
-            opacity: 0; 
-            transform: translateY(-30px); 
-          }
-          to { 
-            opacity: 1; 
-            transform: translateY(0); 
-          }
-        }
-
-        @keyframes fadeInUp {
-          from { 
-            opacity: 0; 
-            transform: translateY(20px); 
-          }
-          to { 
-            opacity: 1; 
-            transform: translateY(0); 
-          }
         }
 
         @keyframes titleFloat {
@@ -387,129 +399,168 @@ export default function FAQPage() {
           50% { transform: translateY(-5px); }
         }
 
-        @keyframes slideInStagger {
-          from { 
-            opacity: 0; 
-            transform: translateY(20px); 
-          }
-          to { 
-            opacity: 1; 
-            transform: translateY(0); 
-          }
+        #footerFeedback {
+          color: #333333; 
         }
-
-        @keyframes slideInContent {
-          from { 
-            opacity: 0; 
-            transform: translateY(-10px); 
-          }
-          to { 
-            opacity: 1; 
-            transform: translateY(0); 
-          }
+        #footerFeedback p {
+          margin-bottom: 16px;
+          font-size: 1rem;
+          font-weight: 500;
+          color: #333333;
         }
-
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.02); }
+        #footerFeedback .footer-actions {
+          display: inline-flex;
+          gap: 16px;
+          margin-bottom: 12px;
         }
-
-        @media (max-width: 600px) {
-          header h1 {
-            font-size: 2rem;
-          }
-
-          footer button {
-            width: 100%;
-            margin: 8px 0;
-          }
+        #footerFeedback .footer-btn {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 10px 28px;
+          font-size: 1rem;
+          font-weight: 600;
+          border: none;
+          border-radius: 999px;
+          cursor: pointer;
+          color: #ffffff;
+          transition: transform 0.15s ease, box-shadow 0.15s ease;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        #footerFeedback .footer-btn.yes {
+          background: linear-gradient(90deg, #00e676 0%, #1de9b6 100%);
+        }
+        #footerFeedback .footer-btn.no {
+          background: linear-gradient(90deg, #ff5252 0%, #ff1744 100%);
+        }
+        #footerFeedback .footer-btn:hover {
+          transform: scale(1.05) translateY(-1px);
+          box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        #footerFeedback .footer-email {
+          display: inline-block;
+          margin-top: 8px;
+          font-size: 0.95rem;
+        }
+        #footerFeedback .footer-email a {
+          color: #00b0ff;
+          text-decoration: underline;
+        }
+        #footerFeedback .footer-email a:hover {
+          color: #0081cb;
         }
       `}</style>
 
-      <div className="container">
-        <header>
-          <h1>Omni Tech</h1>
-          <h3>FAQ / Support</h3>
-        </header>
+    
+      <div className="faq-wrapper">
+        <div className="container">
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+          <div className="bubble"></div>
+          <header>
+            <h1>Omni Tech</h1>
+            <h3>FAQ / Support</h3>
+          </header>
 
-        <div className="faq">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="faq-item"
-              onMouseEnter={() => handleMouseEnter(index)}
-              onMouseLeave={handleMouseLeave}
-              style={{
-                animationDelay: `${index * 0.1}s`
-              }}
-            >
-              <div className="question">
-                {faq.question}
-                <span className={`expand-icon ${openFAQ === index ? 'open' : ''}`}>
-                  +
-                </span>
-              </div>
-              <div className={`answer ${openFAQ === index ? 'open' : ''}`}>
-                {faq.answer}
-                <div className="feedback">
-                  {feedbacks[index] ? (
-                    <p className="thank-you">Thank you for your feedback!</p>
-                  ) : (
-                    <>
-                      <span>Was this helpful?</span>
-                      <button
-                        type="button"
-                        className="yes"
-                        onClick={() => handleFeedback(index)}
-                      >
-                        Yes
-                      </button>
-                      <button
-                        type="button"
-                        className="no"
-                        onClick={() => handleFeedback(index)}
-                      >
-                        No
-                      </button>
-                    </>
-                  )}
+          <div className="faq">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="faq-item"
+                onMouseEnter={() => handleMouseEnter(index)}
+              >
+                <div className="question">
+                  {faq.question}
+                  <span className={`expand-icon ${openFAQ === index ? "open" : ""}`}>
+                    +
+                  </span>
+                </div>
+                <div className={`answer ${openFAQ === index ? "open" : ""}`}>
+                  {faq.answer}
+                  <div className="feedback">
+                    {feedbacks[index] ? (
+                      <p className="thank-you">Thank you for your feedback!</p>
+                    ) : (
+                      <>
+                        <span>Was this helpful?</span>
+                        <button
+                          type="button"
+                          className="yes"
+                          onClick={() => handleFeedback(index)}
+                        >
+                          Yes
+                        </button>
+                        <button
+                          type="button"
+                          className="no"
+                          onClick={() => handleFeedback(index)}
+                        >
+                          No
+                        </button>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
-        <footer id="footerFeedback">
-          <p>Was this page helpful?</p>
-          {footerFeedback ? (
-            <p className="thank-you">Thank you for your feedback!</p>
-          ) : (
-            <>
-              <button
-                type="button"
-                className="yes"
-                onClick={() => setFooterFeedback(true)}
-              >
-                👍 Yes
-              </button>
-              <button
-                type="button"
-                className="no"
-                onClick={() => setFooterFeedback(true)}
-              >
-                👎 No
-              </button>
-            </>
-          )}
-          <br />
-          <small>
-            Need more help? Email us at <br />
-            <a href="mailto:gayatridengale515@gmail.com">
-              gayatridengale515@gmail.com
-            </a>
-          </small>
-        </footer>
+          <footer id="footerFeedback">
+            <p>Was this page helpful?</p>
+            {footerFeedback ? (
+              <p className="thank-you">Thank you for your feedback!</p>
+            ) : (
+              <div className="footer-actions">
+                <button
+                  type="button"
+                  className="footer-btn yes"
+                  onClick={() => setFooterFeedback(true)}
+                >
+                  <span role="img" aria-label="Yes">👍</span> Yes
+                </button>
+                <button
+                  type="button"
+                  className="footer-btn no"
+                  onClick={() => setFooterFeedback(true)}
+                >
+                  <span role="img" aria-label="No">👎</span> No
+                </button>
+              </div>
+            )}
+            <br />
+            <small className="footer-email">
+              Need more help? Email us at <br />
+              <a href="mailto:gayatridengale515@gmail.com">
+                gayatridengale515@gmail.com
+              </a>
+            </small>
+          </footer>
+        </div>
       </div>
     </>
   );
-}
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
