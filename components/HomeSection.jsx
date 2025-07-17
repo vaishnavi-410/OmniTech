@@ -14,12 +14,12 @@ export default function HomeSection() {
 
   const slides = [
     {
-      img: '/images/slider/slide1.jpg',
+      img: '/images/slider/slide1.png',
       title: 'Precision Machines',
       desc: 'High accuracy for advanced manufacturing with our state-of-the-art industrial equipment.',
     },
     {
-      img: '/images/slider/slide2.jpg',
+      img: '/images/slider/slide2.png',
       title: 'Automation Systems',
       desc: 'Streamlining processes for maximum efficiency with cutting-edge robotic solutions.',
     },
@@ -29,7 +29,7 @@ export default function HomeSection() {
       desc: 'Transforming production lines into intelligent Industry 4.0 systems with IoT integration.',
     },
     {
-      img: '/images/slider/slide4.jpg',
+      img: '/images/slider/slide4.png',
       title: 'Eco-Friendly Solutions',
       desc: 'Building sustainable technologies for a greener industrial future.',
     },
