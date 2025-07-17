@@ -85,19 +85,10 @@ export const Menus = [
     ],
   },
   {
-    name: "Help",
+    name: "FAQs",
     gridCols: 1,
-    subMenuHeading: [
-      "FAQ",
-    ],
-    subMenu: [
-      {
-        name: "FAQs",
-        desc: "Frequently Asked Questions",
-        icon: HelpCircle,
-        path: "/help/faqs",
-      }
-    ]
+    path:"/faqs",
+  
   },
   {
    name: "Contact",
