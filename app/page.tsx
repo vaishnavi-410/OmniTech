@@ -14,7 +14,7 @@ export default function Home() {
     <>
       <HomeSection />
       <About />
-      <Categories />
+      <Categories/>
       <Products />
       <Experience />
       <TrustedBrands />
