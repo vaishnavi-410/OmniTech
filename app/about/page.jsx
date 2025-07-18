@@ -207,12 +207,7 @@ export default function AboutPage() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="flex gap-4 justify-center"
           >
-            <button className="px-6 py-3 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-lg shadow-lg hover:shadow-xl transition-all hover:scale-105">
-              Our Products
-            </button>
-            <button className="px-6 py-3 bg-white text-blue-600 border border-blue-200 rounded-lg shadow-lg hover:shadow-xl transition-all hover:scale-105">
-              Contact Us
-            </button>
+            
           </motion.div>
         </div>
       </section>
@@ -498,20 +493,7 @@ export default function AboutPage() {
               We're always looking for talented individuals who share our passion for innovation and sustainability.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white rounded-lg shadow-lg hover:shadow-xl transition-all"
-              >
-                View Open Positions
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-white text-blue-600 border border-blue-200 rounded-lg shadow-lg hover:shadow-xl transition-all"
-              >
-                Contact Our Team
-              </motion.button>
+            
             </div>
           </motion.div>
         </div>
